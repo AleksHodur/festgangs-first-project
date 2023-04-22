@@ -11,6 +11,15 @@ conexionBD.connect((err) => {
     console.log('Connected! :)');
 });
 
+conexionBD.query('DROP DATABASE IF EXISTS festgangs;', (err, result) => {
+    if (err) throw err;
+    console.log('Result: ' + result);
+});
+
+conexionBD.query('CREATE DATABASE festgangs;', (err, result) => {
+    if (err) throw err;
+    console.log('Base de datos creada con éxito');
+});
 
 conexionBD.query('DROP TABLE IF EXISTS festgangs.user;', (err, result) => {
     if (err) throw err;
@@ -18,7 +27,8 @@ conexionBD.query('DROP TABLE IF EXISTS festgangs.user;', (err, result) => {
 });
 
 let crearTablaUser = 'CREATE TABLE festgangs.user (' +
-                    'email VARCHAR(50) PRIMARY KEY,' +
+                    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+                    'email VARCHAR(50) NOT NULL,' +
                     'name VARCHAR(30) NOT NULL,' +
                     'password VARCHAR(30) NOT NULL' +
                     ');';
@@ -27,7 +37,7 @@ console.log(crearTablaUser);
 
 conexionBD.query(crearTablaUser, (err, result) => {
     if (err) throw err;
-    console.log('Result: ' + result);
+    console.log('Tabla user creada con éxito');
 });
 
 let llenarTablaUser = 'INSERT INTO festgangs.user (email, name, password) VALUES' +
@@ -38,5 +48,13 @@ console.log(llenarTablaUser);
 
 conexionBD.query(llenarTablaUser, (err, result) => {
     if (err) throw err;
-    console.log('Result: ' + result);
+    console.log('Tabla user rellenada con éxito');
 });
+
+/* let userId = 2;
+
+conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, result, fields) => {
+    if (err) throw err;
+    console.log(result);
+    console.log(fields);
+}); */
