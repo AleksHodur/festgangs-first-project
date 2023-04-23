@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const userModel = require('./models/userModel');
 
 const conexionBD = mysql.createConnection({
     host: 'localhost',
@@ -51,10 +52,19 @@ conexionBD.query(llenarTablaUser, (err, result) => {
     console.log('Tabla user rellenada con éxito');
 });
 
-/* let userId = 2;
-
+let userId = 2;
+/*
 conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, result, fields) => {
     if (err) throw err;
     console.log(result);
     console.log(fields);
 }); */
+
+conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, result, fields) => {
+    if (err) throw err;
+/*     console.log(result);
+    console.log(result[0].id); */
+    let field = result[0];
+    let user = userModel(field.id, field.email, field.name, field.password);
+    console.log(user);
+});
