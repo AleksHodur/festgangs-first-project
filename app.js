@@ -8,6 +8,12 @@ const app = express();
 //registro del motor de vista: ejs
 app.set('view engine', 'ejs');
 
+//static files middleware
+/* If we wa
+nt to link static (css, images, ...) we have to explicitly specify them in opur node code
+Otherwise, the server will protect our files form the public */
+app.use(express.static('public')); //publish anything inside public directory
+
 //servidor web en el puerto 3000 en localhost
 app.listen(3000);
 
