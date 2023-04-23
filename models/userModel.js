@@ -5,6 +5,10 @@ class userModel {
         this.name = name;
         this.password = password;
     }
+
+    saludo() {
+        return 'Hola, ' + this.name;
+    }
 }
 
 /* function createUserModel(id, email, name, password){
