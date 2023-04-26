@@ -1,30 +1,55 @@
 $(document).ready(function(){
     const botonInicio = $('#inicioSesion');
-    const form = $('#formSesion');
 
-    const datosUsuario = {
-        email: $('#email'),
-        password: $('#password')
-    };
+     console.log('Antes del get');
+    $.get('/prueba', function(data, status) {
+        console.log(data.message);
+    }); 
+/* 
+    $.ajax({
+        url: '/prueba',
+        type: 'GET',
+        contentType: 'application/json',
+        data: JSON.stringify(datosUsuario),
+
+        success: function(data, status){
+            console.log(data.message);
+            alert('enhorabuena');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', textStatus, errorThrown);
+            console.log('jqXR:', jqXHR);
+          }
+    }); */
 
     $(botonInicio).click(function(){
 
-/*         $.post('/login', datosUsuario, function(response, status){
+        let datosUsuario = {
+            email: document.getElementById('email').value(),
+            password: $('#password').val()
+        };
+
+        console.log('antes del parseado');
+        console.log('antes del parseado 2');
+        console.log(JSON.stringify(datosUsuario));
+
+/*         $.post('/login', datosUsuario, function(data, status){
             console.log(response);
         });  */
 
-        $.ajax({
+/*          $.ajax({
             url: '/login',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(datosUsuario),
+            data: datosUsuario,
 
             success: function(data, status){
                 console.log(data);
             },
-            error: function(error){
-                console.error(error);
-            }
-        });
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+                console.log('jqXR:', jqXHR);
+              }
+        });  */
     });
 });

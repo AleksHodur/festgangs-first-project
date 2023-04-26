@@ -38,8 +38,14 @@ app.get('/user/:email', (request, response) => {
     response.json();
 });
 
+app.get('/prueba', (request, response) => {
+    response.status(200).json({ message: 'Success!' });
+    console.log('éxito');
+    //response.send('Success!');
+});
+
 app.post('/login', (request, response) => {
     const {email, password} = request.body;
 
-    response.json({message: 'Mensaje del servidor: éxito', email: email, password: password});
+    response.status(201).json({message: 'Mensaje del servidor: éxito', email: email, password: password});
 });
