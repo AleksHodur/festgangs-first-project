@@ -33,3 +33,7 @@ conexionBD.connect((err) => {
 app.get('/', (request, response) => {
     response.render('index');
 });
+
+app.get('/user/:email', (request, response) => {
+    response.json();
+});

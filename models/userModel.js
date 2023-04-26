@@ -1,4 +1,6 @@
 class userModel {
+    constructor(){}
+
     constructor(id, email, name, password){
         this.id = id;
         this.email = email;
@@ -8,6 +10,10 @@ class userModel {
 
     saludo() {
         return 'Hola, ' + this.name;
+    }
+
+    static getById(id, ){
+
     }
 }
 
