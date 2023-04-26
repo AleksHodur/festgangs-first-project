@@ -37,3 +37,9 @@ app.get('/', (request, response) => {
 app.get('/user/:email', (request, response) => {
     response.json();
 });
+
+app.post('/login', (request, response) => {
+    const {email, password} = request.body;
+
+    response.json({message: 'Mensaje del servidor: éxito', email: email, password: password});
+});

@@ -12,15 +12,12 @@ class userModel {
         return 'Hola, ' + this.name;
     }
 
-    static getById(id, ){
-
-    }
 }
 
 /* function createUserModel(id, email, name, password){
     return new userModel(id, email, name, password);
+} */
+
+export function createUserModel(id, email, name, password){
+    return new userModel(id, email, name, password);
 }
-
-module.exports = createUserModel; */
-
-module.exports = (id, email, name, password) => new userModel(id, email, name, password);
