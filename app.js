@@ -13,10 +13,20 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 //servidor web en el puerto 3000 en localhost
-app.listen(3000, 'localhost');
+app.listen(3000, 'localhost', () => {
+    console.log('server is listening on port 3000');
+});
+
+app.use(express.json()); // This line is to parse JSON request bodies
 
 //para parsear url request en objetos
 app.use(express.urlencoded({extended: true}));
+
+app.use(function (req, res, next) {
+    console.log('Request received: ', req.url);
+    next();
+  });
+  
 
 //conexión base de datos
 const conexionBD = mysql.createConnection({
@@ -45,7 +55,17 @@ app.get('/prueba', (request, response) => {
 });
 
 app.post('/login', (request, response) => {
-    const {email, password} = request.body;
-
-    response.status(201).json({message: 'Mensaje del servidor: éxito', email: email, password: password});
-});
+    console.log("en el post en node");
+    const { email, password } = request.body;
+    if (!email || !password) {
+        response.status(400).json({error: 'Missing email or password'});
+        return;
+      }
+      try {
+        // Do something with the email and password
+        response.status(201).json({message: 'Mensaje del servidor: éxito', email: email, password: password});
+      } catch (error) {
+        console.error(error);
+        response.status(500).json({error: 'Internal server error'});
+      }
+    });
