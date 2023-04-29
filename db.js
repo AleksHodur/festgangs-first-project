@@ -64,6 +64,7 @@ conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, r
     if (err) throw err;
 /*     console.log(result);
     console.log(result[0].id); */
+    console.log(result);
     let field = result[0];
     let user = userModel(field.id, field.email, field.name, field.password);
     console.log(user.saludo());

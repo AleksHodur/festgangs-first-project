@@ -37,7 +37,7 @@ const conexionBD = mysql.createConnection({
 
 conexionBD.connect((err) => {
     if(err) throw err;
-    console.log('Connected! :)');
+    console.log('Connected to db! :)');
 });
 
 app.get('/', (request, response) => {
@@ -55,17 +55,27 @@ app.get('/prueba', (request, response) => {
 });
 
 app.post('/login', (request, response) => {
-    console.log("en el post en node");
-    const { email, password } = request.body;
-    if (!email || !password) {
-        response.status(400).json({error: 'Missing email or password'});
-        return;
-      }
-      try {
-        // Do something with the email and password
-        response.status(201).json({message: 'Mensaje del servidor: éxito', email: email, password: password});
-      } catch (error) {
-        console.error(error);
-        response.status(500).json({error: 'Internal server error'});
-      }
-    });
+
+  const { email, password } = request.body;
+
+  if (!email || !password) {
+      response.status(400).json({error: 'Missing email or password'});
+      return;
+  }
+
+ try {
+      conexionBD.query("SELECT * FROM festgangs.user WHERE email = ? AND password = ?", [email, password], (err, result, fields) => {
+
+        if(err || result.length < 1){
+          response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
+        }else{
+          response.status(200).json({found: true, message: 'Usuario correcto!'});
+        }
+      });
+
+  } catch (error) {
+      console.error(error);
+      response.status(500).json({error: 'Internal server error'});
+  }
+
+});

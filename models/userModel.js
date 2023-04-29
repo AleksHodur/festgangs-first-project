@@ -1,5 +1,4 @@
 class userModel {
-    constructor(){}
 
     constructor(id, email, name, password){
         this.id = id;
@@ -18,6 +17,4 @@ class userModel {
     return new userModel(id, email, name, password);
 } */
 
-export function createUserModel(id, email, name, password){
-    return new userModel(id, email, name, password);
-}
+module.exports = (id, email, name, password) => new userModel(id, email, name, password);
