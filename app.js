@@ -1,6 +1,7 @@
-const express = require('express');
-const { render } = require('ejs');
-const mysql = require('mysql');
+const express = require('express'); //framework express
+const { render } = require('ejs'); //framework ejs para incrustar código de servidor en html
+const mysql = require('mysql'); //driver de mysql
+const session = require('express-session'); //módulo de sesiones de express
 
 //express app
 const app = express();
