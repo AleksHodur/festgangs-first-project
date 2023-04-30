@@ -39,7 +39,9 @@ $(document).ready(function(){
 
             $('#message').text(data.message);
 
-            window.location.replace("/");
+            if(data.found){
+                window.location.replace("/");
+            }
 
         })
         .fail(function(error) {

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <script src="/js/inicioSesion.js" defer></script>
+
+</head>
+<body>
+    <h1>Bienvenido a FestGangs</h1>
+
+    <h2>Inicia sesión, parguela</h2>
+    <form id="formSesion">
+        <label for="email">Correo electrónico</label>
+        <input type="text" name="email" id="email"><br>
+        <label for="pass">Contraseña</label>
+        <input type="text" name="pass" id="pass"><br>
+        <button id="inicioSesion">Inicia sesión</button>
+    </form>
+    <p id="message"></p>
+
+</body>
+</html>
