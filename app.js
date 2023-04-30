@@ -2,6 +2,7 @@ const express = require('express'); //framework express
 const { render } = require('ejs'); //framework ejs para incrustar código de servidor en html
 const mysql = require('mysql'); //driver de mysql
 const session = require('express-session'); //módulo de sesiones de express
+const userModel = require('./models/userModel'); //carga el modelo usuario
 
 //express app
 const app = express();
@@ -41,8 +42,29 @@ conexionBD.connect((err) => {
     console.log('Connected to db! :)');
 });
 
+/**
+ * Iniciando la sesión
+ */
+app.use(session({
+  
+  // It holds the secret key for session
+  secret: 'secreto',
+
+  // Forces the session to be saved
+  // back to the session store
+  resave: true,
+
+  // Forces a session that is "uninitialized"
+  // to be saved to the store
+  saveUninitialized: true
+}))
+
 app.get('/', (request, response) => {
-    response.render('index');
+    if(request.session.user){
+      response.render('index', {user: request.session.user});
+    }else{
+      response.render('sesion');
+    }
 });
 
 app.get('/user/:email', (request, response) => {
@@ -70,6 +92,8 @@ app.post('/login', (request, response) => {
         if(err || result.length < 1){
           response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
         }else{
+          let fields = result[0];
+          request.session.user = userModel(fields.id, fields.email, fields.name, fields.password);
           response.status(200).json({found: true, message: 'Usuario correcto!'});
         }
       });

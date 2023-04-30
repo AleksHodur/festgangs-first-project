@@ -6,22 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="/js/jquery-3.6.4.min.js"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->    
     <script src="/js/inicioSesion.js" defer></script>
 
 </head>
 <body>
-    <h1>Bienvenido a FestGangs</h1>
+    <h1>Bienvenido a FestGangs, <%= user.name %></h1>
 
-    <h2>Inicia sesión, pargela</h2>
-    <form id="formSesion">
-        <label for="email"></label>
-        <input type="text" name="email" id="email"><br>
-        <label for="pass"></label>
-        <input type="text" name="pass" id="pass"><br>
-        <button id="inicioSesion">Inicia sesión</button>
-    </form>
-    <p id="message"></p>
+    <button id="cerrarSesion">Cerrar sesión</button>
 
 </body>
 </html>
