@@ -77,6 +77,12 @@ app.get('/prueba', (request, response) => {
     //response.send('Success!');
 });
 
+/**Para cerrar la sesión */
+app.get('/close', (request, response) => {
+    request.session.destroy();
+    response.redirect('/');
+});
+
 app.post('/login', (request, response) => {
 
   const { email, password } = request.body;

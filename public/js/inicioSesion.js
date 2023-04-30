@@ -38,6 +38,9 @@ $(document).ready(function(){
             console.log(data);
 
             $('#message').text(data.message);
+
+            window.location.replace("/");
+
         })
         .fail(function(error) {
             console.log(error);
