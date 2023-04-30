@@ -61,10 +61,14 @@ app.use(session({
 
 app.get('/', (request, response) => {
     if(request.session.user){
-      response.render('index', {user: request.session.user});
+      response.render('index', {title: 'Inicio', user: request.session.user});
     }else{
-      response.render('sesion');
+      response.redirect('/sesion');
     }
+});
+
+app.get('/sesion', (request, response) => {
+    response.render('sesion', {title: 'Login'});
 });
 
 app.get('/user/:email', (request, response) => {
@@ -80,7 +84,7 @@ app.get('/prueba', (request, response) => {
 /**Para cerrar la sesión */
 app.get('/close', (request, response) => {
     request.session.destroy();
-    response.redirect('/');
+    response.redirect('/sesion');
 });
 
 app.post('/login', (request, response) => {
