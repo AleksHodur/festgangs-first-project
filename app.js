@@ -63,11 +63,11 @@ app.get('/', (request, response) => {
     if(request.session.user){
       response.render('index', {title: 'Inicio', user: request.session.user});
     }else{
-      response.redirect('/sesion');
+      response.redirect('/login');
     }
 });
 
-app.get('/sesion', (request, response) => {
+app.get('/login', (request, response) => {
 /*     let number = Math.floor(Math.random() * 6) + 1;
     let imagePath = "url('/img/login/login" + number + ".webp')"; */
 
@@ -87,7 +87,7 @@ app.get('/prueba', (request, response) => {
 /**Para cerrar la sesión */
 app.get('/close', (request, response) => {
     request.session.destroy();
-    response.redirect('/sesion');
+    response.redirect('/login');
 });
 
 app.post('/login', (request, response) => {

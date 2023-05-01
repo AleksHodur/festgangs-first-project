@@ -43,24 +43,31 @@ $(document).ready(function(){
             password: $('#pass').val()
         };
 
-        console.log('antes del parseado');
+/*         console.log('antes del parseado');
         console.log('antes del parseado 2');
-        console.log(JSON.stringify(datosUsuario));
-          
+        console.log(JSON.stringify(datosUsuario)); */
 
-        $.post('/login', datosUsuario, function(data, status){
-            console.log(data);
-
-            $('#message').text(data.message);
-
-            if(data.found){
-                window.location.replace("/");
+        if(validarCorreo(datosUsuario.email)){
+            if(datosUsuario.password != null && datosUsuario.password != ''){
+                $.post('/login', datosUsuario, function(data, status){
+                    console.log(data);
+            
+                    if(data.found){
+                        window.location.replace("/");
+                    }else{
+                        $('#message').text(data.message);
+                    }
+        
+                })
+                .fail(function(error) {
+                    console.log(error);
+                  });
+            }else{
+                $('#message').text('Introduce una contraseña');
             }
-
-        })
-        .fail(function(error) {
-            console.log(error);
-          });
+        }else{
+            $('#message').text('Introduce un correo electrónico válido');
+        }
 
 /*          $.ajax({
             url: '/login',
@@ -82,3 +89,8 @@ $(document).ready(function(){
 
     });
 });
+
+function validarCorreo(correo){
+    let patron = /^[a-z]+([a-z0-9]|_|\-)+@([a-z0-9]|_|\-)+\.[a-z]{2,3}$/;
+    return patron.test(correo);
+}
