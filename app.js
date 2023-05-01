@@ -1,6 +1,5 @@
 const express = require('express'); //framework express
 const { render } = require('ejs'); //framework ejs para incrustar código de servidor en html
-const mysql = require('mysql'); //driver de mysql
 const session = require('express-session'); //módulo de sesiones de express
 
 const loginRoutes = require('./routes/loginRoutes');
@@ -29,19 +28,6 @@ app.use(function (req, res, next) {
     console.log('Request received: ', req.url);
     next();
   });
-  
-
-//conexión base de datos
-const conexionBD = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root'
-});
-
-conexionBD.connect((err) => {
-    if(err) throw err;
-    console.log('Connected to db! :)');
-});
 
 /**
  * Iniciando la sesión
