@@ -2,7 +2,8 @@ const express = require('express'); //framework express
 const { render } = require('ejs'); //framework ejs para incrustar código de servidor en html
 const mysql = require('mysql'); //driver de mysql
 const session = require('express-session'); //módulo de sesiones de express
-const userModel = require('./models/userModel'); //carga el modelo usuario
+
+const loginRoutes = require('./routes/loginRoutes');
 
 //express app
 const app = express();
@@ -67,13 +68,6 @@ app.get('/', (request, response) => {
     }
 });
 
-app.get('/login', (request, response) => {
-/*     let number = Math.floor(Math.random() * 6) + 1;
-    let imagePath = "url('/img/login/login" + number + ".webp')"; */
-
-    response.render('sesion', {title: 'Login'});
-});
-
 app.get('/user/:email', (request, response) => {
     response.json();
 });
@@ -84,36 +78,5 @@ app.get('/prueba', (request, response) => {
     //response.send('Success!');
 });
 
-/**Para cerrar la sesión */
-app.get('/close', (request, response) => {
-    request.session.destroy();
-    response.redirect('/login');
-});
+app.use(loginRoutes);
 
-app.post('/login', (request, response) => {
-
-  const { email, password } = request.body;
-
-  if (!email || !password) {
-      response.status(400).json({error: 'Missing email or password'});
-      return;
-  }
-
- try {
-      conexionBD.query("SELECT * FROM festgangs.user WHERE email = ? AND password = ?", [email, password], (err, result, fields) => {
-
-        if(err || result.length < 1){
-          response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
-        }else{
-          let fields = result[0];
-          request.session.user = userModel(fields.id, fields.email, fields.name, fields.password);
-          response.status(200).json({found: true, message: 'Usuario correcto!'});
-        }
-      });
-
-  } catch (error) {
-      console.error(error);
-      response.status(500).json({error: 'Internal server error'});
-  }
-
-});

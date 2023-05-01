@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     $('#cerrarSesion').click(function(){
 
-        $.get('/close', function(data, status){
+        $.get('/login/close', function(data, status){
             console.log('Sesión cerrada');
 
             window.location.replace("/");
