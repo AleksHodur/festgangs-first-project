@@ -64,5 +64,5 @@ app.get('/prueba', (request, response) => {
     //response.send('Success!');
 });
 
-app.use(loginRoutes);
+app.use('/login', loginRoutes);
 
