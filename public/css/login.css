@@ -2,9 +2,10 @@ html, body{
     height: 100%;
 }
 
-/* body{
-    background-image: ;
-} */
+body{
+    background-color: deepskyblue;
+    background-size: cover;
+}
 
 .container{
     height: 100%;
@@ -17,8 +18,9 @@ html, body{
 }
 
 #ventanaForm{
-    border: 1px black solid;
+    border: 1px white solid;
     border-radius: 5px;
+    background-color: white;
 }
 
 #message{

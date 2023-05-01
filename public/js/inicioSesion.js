@@ -1,5 +1,19 @@
+//Poner una imagen aleatoria de fondo
+let number = Math.floor(Math.random() * 6) + 1;
+//let number = 1;
+let imagePath = "url('/img/login/login" + number + ".webp')";
+$('body').css("background-image", imagePath)
+
+const botonInicio = $('#inicioSesion');
+
 $(document).ready(function(){
-    const botonInicio = $('#inicioSesion');
+
+/*     //Poner una imagen aleatoria de fondo
+    let number = Math.floor(Math.random() * 6) + 1;
+    let imagePath = "url('/img/login/login" + number + ".jpg')";
+    $('body').css("background-image", imagePath)
+
+    const botonInicio = $('#inicioSesion'); */
 /* 
      console.log('Antes del get');
     $.get('/prueba', function(data, status) {

@@ -68,6 +68,9 @@ app.get('/', (request, response) => {
 });
 
 app.get('/sesion', (request, response) => {
+/*     let number = Math.floor(Math.random() * 6) + 1;
+    let imagePath = "url('/img/login/login" + number + ".webp')"; */
+
     response.render('sesion', {title: 'Login'});
 });
 
