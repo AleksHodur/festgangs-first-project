@@ -21,11 +21,11 @@ const login_close = (request, response) => {
     response.redirect('/login');
 }
 
-const login_check = (request, response) => {
+const login_check = async (request, response) => {
     
 
     const { email, password } = request.body;
-  
+  /*
     if (!email || !password) {
         response.status(400).json({error: 'Missing email or password'});
         return;
@@ -46,17 +46,25 @@ const login_check = (request, response) => {
     } catch (error) {
         console.error(error);
         response.status(500).json({error: 'Internal server error'});
-    }
-
- /*    console.log(userDAO);
-    let user = userDAO.getUserByEmailAndPassword(email, password);
-
-    if(user){
-      request.session.user = user;
-      response.status(200).json({found: true, message: 'Usuario correcto!'});
-    }else{
-      response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
     } */
+
+
+    try{
+      console.log(userDAO);
+      const user = await userDAO.getUserByEmailAndPassword(email, password);
+
+      if(user){
+        console.log(user);
+        request.session.user = user;
+        response.status(200).json({found: true, message: 'Usuario correcto!'});
+      }else{
+        response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
+      }
+
+    }catch(error){
+      console.error(error);
+      response.status(500).json({error: 'Internal server error'});
+    }
       
       
 }
