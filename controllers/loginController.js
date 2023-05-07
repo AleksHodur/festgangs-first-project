@@ -1,18 +1,18 @@
-const mysql = require('mysql'); //driver de mysql
+//const mysql = require('mysql'); //driver de mysql
 
-const userModel = require('../models/userModel'); //carga el modelo usuario
+//const userModel = require('../models/userModel'); //carga el modelo usuario
 const userDAO = require('../dao/userDAO');
 //conexión base de datos
-const conexionBD = mysql.createConnection({
+/* const conexionBD = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'root'
-});
+}); */
 
-conexionBD.connect((err) => {
+/* conexionBD.connect((err) => {
   if(err) throw err;
   console.log('Connected to db! :)');
-});
+}); */
 
 const login_index = (request, response) => {response.render('login', {title: 'Login'});};
 

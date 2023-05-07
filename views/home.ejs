@@ -4,10 +4,22 @@
     <%- include('./partials/head.ejs') %>
     <script src="/js/login/logout.js" defer></script>
     <link rel="stylesheet" href="/css/home.css">
+    <script src="/js/event/event.js" defer></script>
 </head>
 <body>
     <%- include('./partials/header.ejs') %>
 
     <%- include('./partials/nav.ejs') %>
+
+    <main class="container-fluid">
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <p>Aquí irá el calendario</p>
+            </div>
+            <div id="events" class="col-4">
+                Aquí irán los eventos
+            </div>
+        </div>
+    </main>
 </body>
 </html>

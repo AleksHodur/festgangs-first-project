@@ -3,6 +3,7 @@ const { render } = require('ejs'); //framework ejs para incrustar código de ser
 const session = require('express-session'); //módulo de sesiones de express
 
 const loginRoutes = require('./routes/loginRoutes');
+const eventRoutes = require('./routes/eventRoutes');
 
 //express app
 const app = express();
@@ -66,3 +67,4 @@ app.get('/prueba', (request, response) => {
 
 app.use('/login', loginRoutes);
 
+app.use('/event', eventRoutes);

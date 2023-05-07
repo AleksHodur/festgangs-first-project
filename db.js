@@ -78,6 +78,25 @@ conexionBD.query(llenarTablaUser, (err, result) => {
     console.log('Tabla user rellenada con éxito');
 });
 
+const crearTablaEvent = 'CREATE TABLE festgangs.event (' +
+                    'id INT AUTO_INCREMENT PRIMARY KEY,' +
+                    'title VARCHAR(50) NOT NULL,' +
+                    'location VARCHAR(30) NOT NULL' +
+                    ');';
+
+conexionBD.query(crearTablaEvent, (err, result) => {
+    if (err) throw err;
+    console.log('Tabla event creada con éxito');
+});
+
+const llenarTablaEvent = 'INSERT INTO festgangs.event (title, location) VALUES' +
+                    "('Paquita en concierto', 'Barcelona')," +
+                    "('Tsunami Gijón', 'Gijón');";
+
+conexionBD.query(llenarTablaEvent, (err, result) => {
+    if (err) throw err;
+    console.log('Tabla event rellenada con éxito');
+});
 /* let userId = 2;
 /*
 conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, result, fields) => {
