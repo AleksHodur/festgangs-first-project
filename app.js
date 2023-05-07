@@ -48,7 +48,7 @@ app.use(session({
 
 app.get('/', (request, response) => {
     if(request.session.user){
-      response.render('index', {title: 'Inicio', user: request.session.user});
+      response.render('home', {title: 'Inicio', user: request.session.user});
     }else{
       response.redirect('/login');
     }
