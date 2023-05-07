@@ -29,7 +29,7 @@ const getUserByEmailAndPassword = async (email, password) => {
   try{
     const rows = await query(sql, args);
     const fields = rows[0];
-    return userModel(fields.id, fields.email, fields.name, fields.password);
+    return userModel(fields.id, fields.type, fields.email, fields.name, fields.password);
 
   }catch(error){
     console.error(error);
