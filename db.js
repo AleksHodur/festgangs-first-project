@@ -32,6 +32,11 @@ conexionBD.query('DROP TABLE IF EXISTS festgangs.user;', (err, result) => {
     console.log('Result: ' + result);
 });
 
+conexionBD.query('DROP TABLE IF EXISTS festgangs.event;', (err, result) => {
+    if (err) throw err;
+    console.log('Result: ' + result);
+});
+
 const crearTablaUserType = 'CREATE TABLE festgangs.usertype (' +
                             'id INT AUTO_INCREMENT PRIMARY KEY,' +
                             'name VARCHAR(30) NOT NULL,' +
@@ -69,7 +74,8 @@ conexionBD.query(crearTablaUser, (err, result) => {
 
 const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password) VALUES' +
                     "(1, 'correo@basic.es', 'Basic Martínez', '1234')," +
-                    "(1, 'juan@gmail.com', 'Juan Coppola', '4321');";
+                    "(1, 'juan@gmail.com', 'Juan Coppola', '4321')," +
+                    "(1, 'george.blunt@gmail.com', 'George Blunt', 'contrasenadegeorge');";
 
 console.log(llenarTablaUser);
 

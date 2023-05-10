@@ -91,6 +91,6 @@ $(document).ready(function(){
 });
 
 function validarCorreo(correo){
-    let patron = /^[a-z]+([a-z0-9]|_|\-)+@([a-z0-9]|_|\-)+\.[a-z]{2,3}$/;
+    let patron = /^[a-z]+([a-z0-9]|_|\-|\.)+@([a-z0-9]|_|\-)+\.[a-z]{2,3}$/;
     return patron.test(correo);
 }
