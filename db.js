@@ -89,7 +89,11 @@ conexionBD.query(llenarTablaUser, (err, result) => {
 const crearTablaEvent = 'CREATE TABLE festgangs.event (' +
                     'id INT AUTO_INCREMENT PRIMARY KEY,' +
                     'title VARCHAR(50) NOT NULL,' +
-                    'location VARCHAR(30) NOT NULL' +
+                    'artist VARCHAR(500) NOT NULL,' +
+                    'city VARCHAR(50) NOT NULL,' +
+                    'country VARCHAR(50) NOT NULL,' +
+                    'location VARCHAR(100),' +
+                    'date DATE NOT NULL' +
                     ');';
 
 conexionBD.query(crearTablaEvent, (err, result) => {
@@ -97,9 +101,11 @@ conexionBD.query(crearTablaEvent, (err, result) => {
     console.log('Tabla event creada con éxito');
 });
 
-const llenarTablaEvent = 'INSERT INTO festgangs.event (title, location) VALUES' +
-                    "('Paquita en concierto', 'Barcelona')," +
-                    "('Tsunami Gijón', 'Gijón');";
+const llenarTablaEvent = 'INSERT INTO festgangs.event (title, artist, city, country, location, date) VALUES' +
+                            "('Hombres G', 'Hombres G', 'Gijón', 'España', 'Palacio de Deportes Presidente Adolfo Suárez', '2023-06-03')," +
+                            "('Skinyz', 'Skinyz', 'Gijón', 'España', 'Billy Bob', '2023-06-10')," +
+                            "('Riverland 2023', 'Sticky M.A., Yung Beef, C.R.O, Delaossa, Cruz Cafuné, Kidd Keo', 'Arriondas', 'España', 'Valle de la Música', '2023-08-24')," +
+                            "('Tsunami Xixón', 'Wolfmother, Dropkick Murphys, Descendents, Me First And TheGimme Gimmes, The Hellacopters, Toundra, Desakato', 'Gijón', 'España', 'Laboral Ciudad de la Cultura', '2023-07-27');";
 
 conexionBD.query(llenarTablaEvent, (err, result) => {
     if (err) throw err;

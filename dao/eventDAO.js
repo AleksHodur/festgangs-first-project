@@ -21,7 +21,7 @@ function query(sql){
     });
 }
 
-const getAllEvents = async (email, password) => {
+const getAllEvents = async () => {
 
     const sql = 'SELECT * FROM festgangs.event';
 
@@ -30,7 +30,8 @@ const getAllEvents = async (email, password) => {
         let events = [];
 
         rows.forEach(row => {
-            events.push(eventModel(row.id, row.title, row.location));
+            events.push(eventModel(row.id, row.title, row.artist, row.city,
+                row.country, row.location, row.date));
         });
 
         return events;
