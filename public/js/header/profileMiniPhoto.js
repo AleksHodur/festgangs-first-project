@@ -4,6 +4,6 @@ $(document).ready(function(){
 
     $.get('/user/inSession', function(data, status){
         let userId = data.id;
-        $(img).attr('src', '/userFiles/' + userId + '/img/profile/profile.jpg');
+        $(img).css('background-image', 'url(/userFiles/' + userId + '/img/profile/profile.jpg)');
     })
 });
