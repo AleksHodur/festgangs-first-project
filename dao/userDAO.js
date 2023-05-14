@@ -29,7 +29,9 @@ const getUserByEmailAndPassword = async (email, password) => {
   try{
     const rows = await query(sql, args);
     const fields = rows[0];
-    return userModel(fields.id, fields.type, fields.email, fields.name, fields.password);
+    console.log('Log fields')
+    console.log(fields);
+    return userModel(fields.id, fields.type, fields.email, fields.name, fields.password, fields.profilePhoto);
 
   }catch(error){
     console.error(error);
