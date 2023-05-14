@@ -4,6 +4,7 @@ const session = require('express-session'); //módulo de sesiones de express
 
 const loginRoutes = require('./routes/loginRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const userRoutes = require('./routes/userRoutes.js');
 
 //express app
 const app = express();
@@ -55,10 +56,6 @@ app.get('/', (request, response) => {
     }
 });
 
-app.get('/user/:email', (request, response) => {
-    response.json();
-});
-
 app.get('/prueba', (request, response) => {
     response.status(200).json({ message: 'Success!' });
     console.log('éxito');
@@ -68,3 +65,5 @@ app.get('/prueba', (request, response) => {
 app.use('/login', loginRoutes);
 
 app.use('/event', eventRoutes);
+
+app.use('/user', userRoutes);

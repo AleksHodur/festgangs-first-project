@@ -36,6 +36,5 @@ const getUserByEmailAndPassword = async (email, password) => {
     return null;
   }
 }
-  
 
 module.exports = {getUserByEmailAndPassword};
