@@ -6,7 +6,7 @@ $(document).ready(function(){
         let hasProfilePic = data.profilePhoto;
         console.log(hasProfilePic);
 
-        if(hasProfilePic == 'y'){
+        if(hasProfilePic){
             let userId = data.id;
             $(img).css('background-image', 'url(/userFiles/' + userId + '/img/profile/profile.jpg)');
         }

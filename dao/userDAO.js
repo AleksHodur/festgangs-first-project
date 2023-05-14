@@ -31,7 +31,7 @@ const getUserByEmailAndPassword = async (email, password) => {
     const fields = rows[0];
     console.log('Log fields')
     console.log(fields);
-    return userModel(fields.id, fields.type, fields.email, fields.name, fields.password, fields.profilePhoto);
+    return userModel(fields.id, fields.type, fields.email, fields.name, fields.password, fields.profile_photo);
 
   }catch(error){
     console.error(error);

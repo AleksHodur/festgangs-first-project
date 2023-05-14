@@ -63,7 +63,7 @@ const crearTablaUser = 'CREATE TABLE festgangs.user (' +
                     'email VARCHAR(50) NOT NULL,' +
                     'name VARCHAR(30) NOT NULL,' +
                     'password VARCHAR(30) NOT NULL,' +
-                    'profilePhoto VARCHAR(1) NOT NULL' +
+                    'profile_photo BOOL NOT NULL' +
                     ');';
 
 //console.log(crearTablaUser);
@@ -73,11 +73,11 @@ conexionBD.query(crearTablaUser, (err, result) => {
     console.log('Tabla user creada con éxito');
 });
 
-const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password, profilePhoto) VALUES' +
-                    "(1, 'ana29@gmail.es', 'Ana29', '1234', 'n')," +
-                    "(1, 'juan@gmail.com', 'juan_guay', '4321', 'n')," +
-                    "(1, 'george.blunt@gmail.com', 'GeorgeBlunt', '1234', 'y')," +
-                    "(1, 'matilda.perfe@pm.com', 'Mtilda', '1234', 'n')";
+const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password, profile_photo) VALUES' +
+                    "(1, 'ana29@gmail.es', 'Ana29', '1234', 0)," +
+                    "(1, 'juan@gmail.com', 'juan_guay', '4321', 0)," +
+                    "(1, 'george.blunt@gmail.com', 'GeorgeBlunt', '1234', 1)," +
+                    "(1, 'matilda.perfe@pm.com', 'Mtilda', '1234', 0)";
 
 console.log(llenarTablaUser);
 
