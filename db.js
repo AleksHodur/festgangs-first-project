@@ -73,9 +73,9 @@ conexionBD.query(crearTablaUser, (err, result) => {
 });
 
 const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password) VALUES' +
-                    "(1, 'correo@basic.es', 'Basic Martínez', '1234')," +
-                    "(1, 'juan@gmail.com', 'Juan Coppola', '4321')," +
-                    "(1, 'george.blunt@gmail.com', 'George Blunt', 'contrasenadegeorge');";
+                    "(1, 'ana29@gmail.es', 'Ana29', '1234')," +
+                    "(1, 'juan@gmail.com', 'juan_guay', '4321')," +
+                    "(1, 'george.blunt@gmail.com', 'GeorgeBlunt', 'contrasenadegeorge');";
 
 console.log(llenarTablaUser);
 

@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $('#cerrarSesion').click(function(){
+    $('#logout').click(function(){
 
         $.get('/login/close', function(data, status){
             console.log('Sesión cerrada');

@@ -21,26 +21,26 @@
                 </div>
             </form>
         </div>
-        <div class="col-2 pl-4 d-flex">
-            <!-- <p><%= user.name %></p> -->
-<!--             <img id="profileMini" style="max-height: 150px; max-width: 150px;"
-            class="img-fluid rounded-circle"
-            src="/userFiles/3/img/profile.jpg" alt="imagenperfil"> -->
-            <div id="profileMini" class="rounded-circle"
+        <div class="col-2 pl-4">
+
+            <div class="dropdown pr-2 d-flex">
+                <div id="profileMini" class="rounded-circle"
             style="background-size: cover; background-position: center;
-            min-height: 80px; min-width: 80px;">&nbsp;</div>
-            <div class="dropdown">
-                <a href="#"
-                type="button"
-                class="btn btn-primary dropdown-toggle"
+            min-height: 80px; min-width: 80px;" data-bs-toggle="dropdown">&nbsp;</div>
+
+                <a href="#"   
+                class="btn-lg dropdown-toggle align-self-center"
                 id="dropdownHeader"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
-                dgfgdf
+                
                 </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownHeader">
-                <li><a href="#" class="dropdown-item">Elemento 1</a></li>
-                <li><a href="#" class="dropdown-item">Elemento 1</a></li>
+                <li><a href="#" class="dropdown-item">Ver perfil</a></li>
+                <li><a href="#" class="dropdown-item">Mis grupos</a></li>
+                <li><a href="#" class="dropdown-item">Ajustes</a></li>
+                <hr class="dropdown-divider">
+                <li><a href="/login/close" class="dropdown-item text-danger">Cerrar sesión</a></li>
             </ul>
             </div>
             <!-- <button id="cerrarSesion">Cerrar sesión</button> -->
