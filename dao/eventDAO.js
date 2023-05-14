@@ -23,7 +23,7 @@ function query(sql){
 
 const getAllEvents = async () => {
 
-    const sql = 'SELECT * FROM festgangs.event';
+    const sql = 'SELECT * FROM festgangs.event ORDER BY date';
 
     try{
         const rows = await query(sql);
