@@ -9,25 +9,33 @@ $(document).ready(function(){
             $(title).text(evento.title);
             $(divEvents).append(title);
 
-            let artist = $('<p></p>');
-            $(artist).text('Artista(s): ' + evento.artist);
-            $(divEvents).append(artist);
+            let location = $('<span></span>');
+            $(location).text(evento.location + ', ' + evento.city + ', ' + evento.country);
+            $(location).attr('class', 'text-secondary ml-3 location');
+            $(title).append(location);
 
-            let location = $('<p></p>');
-            $(location).text('Ubicación: ' + evento.location + ', ' + evento.city + ', ' + evento.country);
-            $(divEvents).append(location);
+            let datosEvento = $('<div></div>');
+            $(datosEvento).attr('class', 'd-flex mt-3');
+            $(divEvents).append(datosEvento);
+
+            let artist = $('<p><b>Artista(s)</b>: ' + evento.artist + '</p>');
+            $(artist).css('max-width', '50%');
+            $(datosEvento).append(artist);
             
             let fechaFormato = new Date(evento.date);
-            let date = $('<p></p>');
-            $(date).text('Fecha: ' + getZero(fechaFormato.getDate()) +
-            '/' + getZero(fechaFormato.getMonth() + 1) + '/' + fechaFormato.getFullYear());
-            $(divEvents).append(date);
+            let textoFecha ='<b>Fecha</b>: ' + getZero(fechaFormato.getDate()) +
+            '/' + getZero(fechaFormato.getMonth() + 1) + '/' + fechaFormato.getFullYear();
+            let date = $('<p>' + textoFecha + '</p>');
+            $(date).attr('class', 'ml-3')
+            $(datosEvento).append(date);
 
             $(divEvents).append('<hr>');
         });
     })
     .fail(function(){
-        //imprimir mensaje no encotrao o algo así
+        let error = $('<h1></h1>');
+        $(error).text('No se han encontrado eventos :(');
+        $(divEvents).append(error);
     });
 });
 
