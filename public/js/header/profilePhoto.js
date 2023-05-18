@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    let img = $('#profileMini');
+    let img = $('.profilePhoto');
 
     $.get('/user/inSession', function(data, status){
         let hasProfilePic = data.profilePhoto;

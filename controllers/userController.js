@@ -7,9 +7,21 @@ const user_get_in_session = (request, response) => {
     response.status(200).json(user);
 }
 
-const dosomething = (req, res) => {
-    console.log('Hi, Im doing something');
-    res.send('Response from /inSession route');
+const user_show_profile = (request, response) => {
+    response.render('profile', {title: 'Perfil'});
 }
 
-module.exports = {user_get_in_session, dosomething};
+const user_by_id = async (request, response) => {
+
+    const id = request.body;
+
+    try{
+        const user = await userDAO.getById(id);
+
+    }catch(error){
+        console.log(error);
+        response.status(500).json({error: 'Internal server error'});
+    }
+}
+
+module.exports = {user_get_in_session, user_show_profile, user_by_id};

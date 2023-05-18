@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <%- include('./partials/head.ejs') %>
 </head>
+
 <body>
     <%- include('./partials/header.ejs') %>
 
     <%- include('./partials/nav.ejs') %>
 
-    
+    <style>
+        #photo {
+            background-size: cover;
+            background-position: center;
+            min-height: 80px;
+            max-height: 80px;
+        }
+    </style>
+
+    <main class="container-fluid mt-3">
+        <div class="row" style="min-height: 500px;">
+            <div class="col-6">
+                <div class="rounded-circle profilePhoto" id="photo"></div>
+            </div>
+            <div class="col">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, nisi distinctio! Ut harum
+                    doloribus impedit maxime nesciunt accusantium accusamus obcaecati atque fuga esse
+                    repellendus eum laudantium in odio adipisci, expedita vel facilis culpa commodi quos
+                    voluptatem veritatis deserunt magnam debitis? Voluptatibus totam placeat quae laboriosam
+                    enim beatae suscipit non iure.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo itaque doloribus quibusdam officia similique cupiditate fugiat omnis enim, ducimus ea id neque error debitis accusantium maiores ipsam vero voluptatibus consectetur. Quo omnis nostrum fugiat quibusdam eum natus doloribus animi a harum iste fugit quidem nemo esse labore, illum voluptates adipisci?</p>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>

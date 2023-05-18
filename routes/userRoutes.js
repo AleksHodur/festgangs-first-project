@@ -5,4 +5,8 @@ const userController = require('../controllers/userController');
 
 router.get('/inSession', userController.user_get_in_session);
 
+router.get('/profile', userController.user_show_profile)
+
+router.get('/{id}', userController.user_by_id);
+
 module.exports = router;
