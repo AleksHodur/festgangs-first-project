@@ -38,11 +38,11 @@
                     <div class="row">
                         <div class="rounded-circle profilePhoto" id="photo"></div>
                     </div>
-                    <div class="row mt-2">
-                        <p class="text-secondary fs-6"><a id="edit" href="#">Editar perfil</p>
-                    </div>
                     <div class="row">
                         <p id="username"></p>
+                    </div>
+                    <div class="row mt-2">
+                        <p class="text-secondary fs-6"><a id="edit" href="#">Editar perfil</a></p>
                     </div>
                 </div>
             </div>
@@ -67,30 +67,35 @@
             </div>
         </div>
 
-        <div class="modal-fade" id="updateModal" tabindex="-1">
+        <div class="modal fade" id="updateModal" tabindex="-1">
             <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar perfil</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+    
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="bioForm">Sobre mí</label>
+                                <textarea name="bioForm" id="bioForm" class="form-control"></textarea>
+                                <hr>
+                                <label for="artistsForm">Artistas favoritos</label>
+                                <textarea name="artistsForm" id="artistsForm" class="form-control"></textarea>
+                                <hr>
+                                <label for="genresForm">Géneros favoritos</label>
+                                <textarea name="genresForm" id="genresForm" class="form-control"></textarea>
+    
+                            </div>
+                        </form>
+                    </div>
 
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar perfil</h5>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="bioForm">Sobre mí</label>
-                            <textarea name="bioForm" id="bioForm" class="form-control"></textarea>
-                            <hr>
-                            <label for="artistsForm">Sobre mí</label>
-                            <textarea name="artistsForm" id="artistsForm" class="form-control"></textarea>
-                            <hr>
-                            <label for="genresForm">Sobre mí</label>
-                            <textarea name="genresForm" id="genresForm" class="form-control"></textarea>
-                            <hr>
-
-                            <button id="updateButton" class="btn btn-primary">Enviar</button>
-                        </div>
-                    </form>
+                    <div class="modal-footer justify-content-start">
+                        <button id="updateButton" class="btn btn-primary">Enviar</button>
+                    </div>
                 </div>
             </div>
         </div>
