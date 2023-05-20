@@ -1,6 +1,11 @@
 $(document).ready(function(){
 
-    $('#editBio').click(bioForm);
+    //$('#editBio').click(bioForm);
+
+    $('#edit').click(function(){
+        let updateForm = new bootstrap.Modal($('#updateModal'));
+        updateForm.show();
+    });
 });
 
 function bioForm(){
@@ -20,10 +25,4 @@ function bioForm(){
     $(button).text('Actualizar');
 
     $(input).after(button);
-}
-
-function updateBio(){
-    let textoBio = $('#newBio').text();
-
-    $.pos
 }
