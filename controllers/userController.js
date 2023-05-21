@@ -1,4 +1,4 @@
-//const userDAO = require('../dao/userDAO');
+const userDAO = require('../dao/userDAO');
 
 const user_get_in_session = (request, response) => {
     console.log('Hola desde in session');
@@ -24,4 +24,9 @@ const user_by_id = async (request, response) => {
     }
 }
 
-module.exports = {user_get_in_session, user_show_profile, user_by_id};
+const user_update = async (request, response) => {
+
+    const id = request.body;
+}
+
+module.exports = {user_get_in_session, user_show_profile, user_by_id, user_update};

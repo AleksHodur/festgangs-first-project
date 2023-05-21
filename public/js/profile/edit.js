@@ -12,6 +12,16 @@ $(document).ready(function(){
     });
 
     $('#updateButton').click(function(){
-        
+
+        $.ajax({
+            url: '/user/{id}',
+            type: 'PUT',
+            success: function(data, status) {
+                console.log('success on put user/{id}');
+            },
+            fail: function(error) {
+                console.error(error);
+            }
+        });
     });
 });

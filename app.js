@@ -56,10 +56,14 @@ app.get('/', (request, response) => {
     }
 });
 
-app.get('/prueba', (request, response) => {
+/* app.get('/prueba', (request, response) => {
     response.status(200).json({ message: 'Success!' });
     console.log('éxito');
     //response.send('Success!');
+}); */
+
+app.put('/prueba', (request, response) => {
+  response.status(200).json({ message: 'Success!' });
 });
 
 app.use('/login', loginRoutes);
