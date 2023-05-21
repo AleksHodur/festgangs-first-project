@@ -21,42 +21,15 @@ $(document).ready(function(){
 
             await updateUser(data.id);
         });
-
-/*         const infoUser = {
-            bio: $('#bioForm').text(),
-            artists: $('#artistsForm').text(),
-            genres: $('#genresForm').text()
-        };
-
-        $.ajax({
-            url: '/user/' + id,
-            type: 'PUT',
-            data: infoUser,
-            success: function(data, status) {
-                console.log('success on put user/:id');
-            },
-            fail: function(error) {
-                console.error(error);
-            },
-            always: function(data) {
-                $('#updateMessage').text(data.message);
-
-                if(data.success){
-                    $('#updateMessage').attr('class', 'text-success');
-                }else{
-                    $('#updateMessage').attr('class', 'text-danger');
-                }
-            }
-        }); */
     });
 });
 
 async function updateUser(id){
 
     const infoUser = {
-        bio: $('#bioForm').text(),
-        artists: $('#artistsForm').text(),
-        genres: $('#genresForm').text()
+        bio: $('#bioForm').val(),
+        artists: $('#artistsForm').val(),
+        genres: $('#genresForm').val()
     };
 
     $.ajax({
@@ -66,17 +39,16 @@ async function updateUser(id){
         success: function(data, status) {
             console.log('success on put user/:id');
         },
-        fail: function(error) {
+        error: function(error) {
             console.error(error);
-        },
-        always: function(data) {
-            $('#updateMessage').text(data.message);
+        }
+    }).always( function(data) {
+        $('#updateMessage').text(data.message);
 
-            if(data.success){
-                $('#updateMessage').attr('class', 'text-success');
-            }else{
-                $('#updateMessage').attr('class', 'text-danger');
-            }
+        if(data.success){
+            $('#updateMessage').attr('class', 'text-success mt-2');
+        }else{
+            $('#updateMessage').attr('class', 'text-danger mt-2');
         }
     });
 }

@@ -90,24 +90,13 @@ const update = async (user) => {
 
         }
       }
-/* 
-      for(field in fieldsName){
-        if(user.field){
 
-          if(firstTime){
-            firstTime = false;
-            sql += field + ' = ?';
-          }else{
-            sql += ', ' + field + ' = ?';
-          }
-
-          args.push(user.field);
-
-        }
-      }
- */
       sql += ' WHERE id = ?';
       args.push(user.id);
+
+      console.log(sql);
+      console.log('args');
+      console.log(args);
 
       return await queryUpdate(sql, args);
 
