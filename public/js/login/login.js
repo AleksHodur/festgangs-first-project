@@ -7,19 +7,7 @@ $('body').css("background-image", imagePath)
 const botonInicio = $('#inicioSesion');
 
 $(document).ready(function(){
-
-/*     //Poner una imagen aleatoria de fondo
-    let number = Math.floor(Math.random() * 6) + 1;
-    let imagePath = "url('/img/login/login" + number + ".jpg')";
-    $('body').css("background-image", imagePath)
-
-    const botonInicio = $('#inicioSesion'); */
-/* 
-     console.log('Antes del get');
-    $.get('/prueba', function(data, status) {
-        console.log(data.message);
-    });  */
-/* 
+/*
     $.ajax({
         url: '/prueba',
         type: 'GET',
@@ -42,10 +30,6 @@ $(document).ready(function(){
             email: $('#email').val(),
             password: $('#pass').val()
         };
-
-/*         console.log('antes del parseado');
-        console.log('antes del parseado 2');
-        console.log(JSON.stringify(datosUsuario)); */
 
         if(validarCorreo(datosUsuario.email)){
             if(datosUsuario.password != null && datosUsuario.password != ''){
