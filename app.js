@@ -4,7 +4,8 @@ const session = require('express-session'); //módulo de sesiones de express
 
 const loginRoutes = require('./routes/loginRoutes');
 const eventRoutes = require('./routes/eventRoutes');
-const userRoutes = require('./routes/userRoutes.js');
+const userRoutes = require('./routes/userRoutes');
+const groupRoutes = require('./routes/groupRoutes');
 
 //express app
 const app = express();
@@ -71,3 +72,5 @@ app.use('/login', loginRoutes);
 app.use('/event', eventRoutes);
 
 app.use('/user', userRoutes);
+
+app.use('/group', groupRoutes);
