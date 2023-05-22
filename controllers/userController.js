@@ -30,12 +30,16 @@ const user_update = async (request, response) => {
             user.artists = artists;
             user.genres = genres;
 
+            request.session.user.bio = bio;
+            request.session.user.artists = artists;
+            request.session.user.genres = genres;
+
             console.log('el user en el controller con cambios para update');
             console.log(user);
             const success = await userDAO.update(user);
 
             if(success){
-                response.status(201).json({message: 'Perfil actualizado con éxito', success: true});
+                response.status(201).json({message: 'Perfil actualizado con éxito. Actualizando página...', success: true});
             }else{
                 response.status(500).json({message: 'No se ha podido actualizar el perfil', success: false});
             }

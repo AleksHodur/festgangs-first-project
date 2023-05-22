@@ -79,9 +79,9 @@ const crearTablaUser = 'CREATE TABLE festgangs.user (' +
                     'name VARCHAR(30) NOT NULL,' +
                     'password VARCHAR(30) NOT NULL,' +
                     'profile_photo BOOL NOT NULL,' +
-                    'bio TEXT,' +
-                    'artists TEXT,' +
-                    'genres TEXT,' +
+                    'bio VARCHAR(500),' +
+                    'artists VARCHAR(500),' +
+                    'genres VARCHAR(500),' +
                     'FOREIGN KEY (type) REFERENCES usertype(id)' +
                     ');';
 

@@ -47,6 +47,8 @@ async function updateUser(id){
 
         if(data.success){
             $('#updateMessage').attr('class', 'text-success mt-2');
+            setTimeout(2000);
+            location.reload();
         }else{
             $('#updateMessage').attr('class', 'text-danger mt-2');
         }
