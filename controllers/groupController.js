@@ -32,3 +32,12 @@ const group_new = async (request, response) => {
 
     }
 }
+
+const group_new_form = (request, response) => {
+    response.render('groupForm', {title: 'Crear grupo'});
+}
+
+module.exports = {
+    group_new,
+    group_new_form
+};

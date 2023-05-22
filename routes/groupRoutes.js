@@ -5,4 +5,6 @@ const groupController = require('../controllers/groupController');
 
 router.post('/', groupController.group_new);
 
+router.get('/new/:id', groupController.group_new_form)
+
 module.exports = router;
