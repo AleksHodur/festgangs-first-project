@@ -133,9 +133,9 @@ conexionBD.query(llenarTablaEvent, (err, result) => {
 
 const crearTablaEventGroup = 'CREATE TABLE festgangs.eventgroup (' +
                     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
-                    'event INT NOT NULL, ' +
+                    'event_id INT NOT NULL, ' +
                     'leader INT NOT NULL, ' +
-                    'FOREIGN KEY (event) REFERENCES event(id), ' +
+                    'FOREIGN KEY (event_id) REFERENCES event(id), ' +
                     'FOREIGN KEY (leader) REFERENCES user(id)' +
                     ');';
 
