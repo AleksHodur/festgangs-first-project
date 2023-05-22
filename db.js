@@ -37,10 +37,25 @@ conexionBD.query('DROP TABLE IF EXISTS festgangs.event;', (err, result) => {
     console.log('Result: ' + result);
 });
 
+conexionBD.query('DROP TABLE IF EXISTS festgangs.eventgroup;', (err, result) => {
+    if (err) throw err;
+    console.log('Result: ' + result);
+});
+
+conexionBD.query('DROP TABLE IF EXISTS festgangs.usergroup;', (err, result) => {
+    if (err) throw err;
+    console.log('Result: ' + result);
+});
+
+conexionBD.query('DROP TABLE IF EXISTS festgangs.groupcomment;', (err, result) => {
+    if (err) throw err;
+    console.log('Result: ' + result);
+});
+
 const crearTablaUserType = 'CREATE TABLE festgangs.usertype (' +
                             'id INT AUTO_INCREMENT PRIMARY KEY,' +
                             'name VARCHAR(30) NOT NULL,' +
-                            'description VARCHAR(200))';
+                            'description TEXT)';
 
 conexionBD.query(crearTablaUserType, (err, result) => {
     if(err) throw err;
@@ -64,9 +79,10 @@ const crearTablaUser = 'CREATE TABLE festgangs.user (' +
                     'name VARCHAR(30) NOT NULL,' +
                     'password VARCHAR(30) NOT NULL,' +
                     'profile_photo BOOL NOT NULL,' +
-                    'bio VARCHAR(500),' +
-                    'artists VARCHAR(500),' +
-                    'genres VARCHAR(500)' +
+                    'bio TEXT,' +
+                    'artists TEXT,' +
+                    'genres TEXT,' +
+                    'FOREIGN KEY (type) REFERENCES usertype(id)' +
                     ');';
 
 //console.log(crearTablaUser);
@@ -92,7 +108,7 @@ conexionBD.query(llenarTablaUser, (err, result) => {
 const crearTablaEvent = 'CREATE TABLE festgangs.event (' +
                     'id INT AUTO_INCREMENT PRIMARY KEY,' +
                     'title VARCHAR(50) NOT NULL,' +
-                    'artist VARCHAR(500) NOT NULL,' +
+                    'artist TEXT NOT NULL,' +
                     'city VARCHAR(50) NOT NULL,' +
                     'country VARCHAR(50) NOT NULL,' +
                     'location VARCHAR(100),' +
@@ -113,6 +129,46 @@ const llenarTablaEvent = 'INSERT INTO festgangs.event (title, artist, city, coun
 conexionBD.query(llenarTablaEvent, (err, result) => {
     if (err) throw err;
     console.log('Tabla event rellenada con éxito');
+});
+
+const crearTablaEventGroup = 'CREATE TABLE festgangs.eventgroup (' +
+                    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+                    'event INT NOT NULL, ' +
+                    'leader INT NOT NULL, ' +
+                    'FOREIGN KEY (event) REFERENCES event(id), ' +
+                    'FOREIGN KEY (leader) REFERENCES user(id)' +
+                    ');';
+
+conexionBD.query(crearTablaEventGroup, (err, result) => {
+    if (err) throw err;
+    console.log('Tabla eventgroup creada con éxito');
+});
+
+const crearTablaUserGroup = 'CREATE TABLE festgangs.usergroup (' +
+                    'user_id INT, ' +
+                    'group_id INT, ' +
+                    'PRIMARY KEY (user_id, group_id), ' +
+                    'FOREIGN KEY (user_id) REFERENCES user(id), ' +
+                    'FOREIGN KEY (group_id) REFERENCES eventgroup(id)' +
+                    ');';
+
+conexionBD.query(crearTablaUserGroup, (err, result) => {
+    if (err) throw err;
+    console.log('Tabla usergroup creada con éxito');
+});
+
+const crearTablaGroupComment = 'CREATE TABLE festgangs.groupcomment (' +
+                    'id INT AUTO_INCREMENT PRIMARY KEY, ' +
+                    'user_id INT, ' +
+                    'group_id INT, ' +
+                    'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, ' +
+                    'FOREIGN KEY (user_id) REFERENCES user(id), ' +
+                    'FOREIGN KEY (group_id) REFERENCES eventgroup(id)' +
+                    ');';
+
+conexionBD.query(crearTablaGroupComment, (err, result) => {
+    if (err) throw err;
+    console.log('Tabla groupcomment creada con éxito');
 });
 /* let userId = 2;
 /*
