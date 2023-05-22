@@ -42,5 +42,26 @@ const getAllEvents = async () => {
     }
 }
 
+const getById = async (id) => {
 
-module.exports = {getAllEvents};
+    const sql = 'SELECT * FROM festgangs.event WHERE id = ?';
+    const args = [id];
+
+    try{
+        const rows = await query(sql, args);
+        let fields = rows[0];
+
+        return eventModel(fields.id, fields.title, fields.artist, fields.city,
+            fields.country, fields.location, fields.data);
+
+    }catch(error){
+        console.error(error);
+        return null;
+    }
+}
+
+
+module.exports = {
+    getAllEvents,
+    getById
+};

@@ -1,4 +1,5 @@
 const groupDAO = require('../dao/groupDAO');
+const eventDAO =require('../dao/eventDAO');
 
 const group_new = async (request, response) => {
 
@@ -33,8 +34,10 @@ const group_new = async (request, response) => {
     }
 }
 
-const group_new_form = (request, response) => {
-    response.render('groupForm', {title: 'Crear grupo'});
+const group_new_form = async (request, response) => {
+    const evento = await eventDAO.getById(request.params.id);
+
+    response.render('group/groupForm', {title: 'Crear grupo', evento});
 }
 
 module.exports = {
