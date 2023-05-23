@@ -9,17 +9,18 @@ const pool = mysql.createPool({
     database: 'festgangs'
   });
 
-function query(sql){
+  function query(sql, args){
     return new Promise((resolve, reject) => {
-        pool.query(sql, (err, rows) => {
+      pool.query(sql, args, (err, rows) => {
         if (err){
-            reject(err);
+          reject(err);
         }else{
-            resolve(rows);
+          resolve(rows);
         }
-        });
+      });
     });
-}
+  }
+  
 
 const getAllEvents = async () => {
 
@@ -46,13 +47,20 @@ const getById = async (id) => {
 
     const sql = 'SELECT * FROM festgangs.event WHERE id = ?';
     const args = [id];
+    console.log("eventDAO getById() printing id");
+    console.log(id)
+    console.log("eventDAO getById() printing sql");
+    console.log(sql);
+
 
     try{
         const rows = await query(sql, args);
         let fields = rows[0];
+        console.log("eventDAO getById() printing event");
+        console.log(fields);
 
         return eventModel(fields.id, fields.title, fields.artist, fields.city,
-            fields.country, fields.location, fields.data);
+            fields.country, fields.location, fields.date);
 
     }catch(error){
         console.error(error);

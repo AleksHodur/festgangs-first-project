@@ -34,10 +34,34 @@ const group_new = async (request, response) => {
     }
 }
 
-const group_new_form = async (request, response) => {
-    const evento = await eventDAO.getById(request.params.id);
+function getZero(fecha){
 
-    response.render('group/groupForm', {title: 'Crear grupo', evento});
+    if(fecha < 10){
+        return '0' + fecha;
+    }else{
+        return fecha;
+    }
+}
+
+const group_new_form = async (request, response) => {
+
+    let evento = await eventDAO.getById(request.params.id);
+    console.log('evento desde new form controller');
+    console.log(evento);
+    
+/*     let fechaFormato = new Date(evento.date);
+    let textoFecha = getZero(fechaFormato.getDate()) +
+        '/' + getZero(fechaFormato.getMonth() + 1) + '/' + fechaFormato.getFullYear();
+
+    evento.date = textoFecha;
+    console.log('evento con fecha nueva desde new form controller');
+    console.log(evento); */
+
+    if(evento){
+        response.render('group/groupForm', {title: 'Crear grupo', evento: evento});
+    }else{
+        response.render('error/500', {title: 'Error 500'});
+    }
 }
 
 module.exports = {
