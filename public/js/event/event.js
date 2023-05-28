@@ -4,7 +4,7 @@ $(document).ready(function(){
         let divEvents = $('#events');
         let events = data;
 
-        events.forEach(evento => {
+        events.forEach(async evento => {
             /**
              * Creando el contenedor donde estará la información del evento
              */
@@ -73,7 +73,10 @@ $(document).ready(function(){
             $(date).attr('class', 'ml-3')
             $(datosEvento).append(date);
 
-            let infoGroups = $('<div></div>');
+            let groups = await getInfoGroups(evento.id);
+            let infoGroups = getInfoGroups(groups);
+
+            /* let infoGroups = $('<div></div>');
             $(infoGroups).attr('class', 'col mt-3');
             let messageGroups = $('<p></p>');
             $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
@@ -81,7 +84,7 @@ $(document).ready(function(){
             $(newGroup).attr('class', 'btn btn-primary');
             $(newGroup).attr('href', '/group/new/' + evento.id);
             $(newGroup).text('Crear grupo');
-            $(infoGroups).append(messageGroups, newGroup);
+            $(infoGroups).append(messageGroups, newGroup); */
 
             $(newEvent).append(infoGroups);
 
@@ -104,4 +107,46 @@ function getZero(fecha){
     }else{
         return fecha;
     }
+}
+
+async function getGroups(id){
+
+    $.get('/group/byEvent/' + id, function(data, status){
+        return data;
+    })
+    .fail(function(error){
+        return null;
+    });
+
+}
+
+function getInfoGroups(groups){
+
+    let infoGroups = $('<div></div>');
+    $(infoGroups).attr('class', 'col mt-3');
+    let messageGroups = $('<p></p>');
+     $(infoGroups).append(messageGroups);
+
+
+    if(groups == null){
+        $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
+    }else{
+        $(messageGroups).text('Este evento tiene ' + groups.length + ' grupo(s) activo(s)');
+        
+        let checkGroups = $('<a></a>');
+        $(checkGroups).attr('class', 'btn btn-success');
+        $(checkGroups).attr('href', '#');
+        $(checkGroups).text('Ver grupos');
+
+        $(infoGroups).append(checkGroups);
+
+    }
+
+    let newGroup = $('<a></a>');
+    $(newGroup).attr('class', 'btn btn-primary');
+    $(newGroup).attr('href', '/group/new/' + evento.id);
+    $(newGroup).text('Crear grupo');
+    $(infoGroups).append(newGroup);
+
+    return infoGroups;
 }
