@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     <%- include('../partials/head.ejs') %>
+
+    <script src="/js/group/newGroup.js"></script>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
 
     <%- include('../partials/nav.ejs') %>
-
-    <script src="/js/group/groupForm.js" defer></script>
 
     <%
 
@@ -96,11 +96,14 @@
                                 </div>
                             </div>
 
-                            <p id="message" class="text-danger"></p>
+                            <input type="hidden" name="eventId" id="eventId" value="<%= evento.id %>">
 
-                            <button id="newButton" class="btn btn-primary mt-4">Crear grupo</button>
+                            <p id="message" class="text-danger mt-3"></p>
 
                         </form>
+
+                        <button id="newButton" class="btn btn-primary mt-4">Crear grupo</button>
+
                     </div>
                 </div>
             </div>

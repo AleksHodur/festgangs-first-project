@@ -1,9 +1,15 @@
 $(document).ready(function(){
 
+    console.log($('#newButton'));
+
     $('#newButton').click(function(){
 
         $.get('/user/inSession', function(data, status){
-             let user = data;
+            let user = data;
+
+            console.log('En el get');
+            console.log('el user:');
+            console.log(user);
              
              submitForm(user);
         });
@@ -14,13 +20,17 @@ $(document).ready(function(){
 function submitForm(user){
 
     let groupData = {
-        leader: user,
+        event_id: $('#eventId').val(),
+        leader: user.id,
         max_users: $('#maxUsers').val()
     };
 
     if(groupData.max_users >= 2 && groupData.max_users <= 10){
 
         $.post('/group/', groupData, function(data, status){
+
+            console.log('En el post');
+
 
             if(data.success){
                 newSuccess(user);

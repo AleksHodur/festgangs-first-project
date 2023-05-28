@@ -27,7 +27,7 @@ const getByEventAndLeader = async (event_id, leader) => {
     const args = [event_id, leader];
 
     try{
-        const rows = await query(sql, args);
+        const row = await query(sql, args);
         const fields = row[0];
         return fields;
     }catch(error){
@@ -36,15 +36,18 @@ const getByEventAndLeader = async (event_id, leader) => {
     }
 }
 
-const newGroup = async (event_id, leader) => {
+const newGroup = async (event_id, leader, max_users) => {
 
-    const sql = 'INSERT INTO festgangs.group (event_id, leader) VALUES (?, ?)';
-    const args = [event_id, leader];
+    const sql = 'INSERT INTO festgangs.eventgroup (event_id, leader, max_users) VALUES (?, ?, ?)';
+    const args = [event_id, leader, max_users];
+
+    console.log('contenido de args');
+    console.log(args);
 
     try{
-        const rows = await query(sql, args);
+        const row = await query(sql, args);
         const fields = row[0];
-        return groupModel(fields.id, fields.event_id, fields.leader);
+        return groupModel(fields.id, fields.event_id, fields.leader, fields.max_users);
     
     }catch(error){
         console.error(error);
