@@ -69,16 +69,16 @@
 
             <div class="col-5" id="secondHalf">
                 <div class="row">
-                    <div class="col-12">
+                    <div id="newForm" class="col-12">
                         <form>
                             <h1>Grupo nuevo</h1>
 
                             <div class="form-group mt-3">
-                                <label for="maxParticipants">Número máximo de participantes</label>
+                                <label for="maxUsers">Número máximo de participantes</label>
                                 <input type="number"
                                  class="form-control"
-                                  name="maxParticipants"
-                                   id="maxParticipants"
+                                  name="maxUsers"
+                                   id="maxUsers"
                                    min="1"
                                    max="50">    
                             </div>
@@ -96,9 +96,9 @@
                                 </div>
                             </div>
 
-                            <p id="message"></p>
+                            <p id="message" class="text-danger"></p>
 
-                            <button class="btn btn-primary mt-4">Crear grupo</button>
+                            <button id="newButton" class="btn btn-primary mt-4">Crear grupo</button>
 
                         </form>
                     </div>

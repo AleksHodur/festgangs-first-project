@@ -13,5 +13,5 @@ $(document).ready(function(){
             $(img).css('background-image', 'url(/userFiles/default/img/profile/profile.png)');
         }
         
-    })
+    });
 });

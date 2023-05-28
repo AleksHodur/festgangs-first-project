@@ -93,10 +93,10 @@ conexionBD.query(crearTablaUser, (err, result) => {
 });
 
 const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password, profile_photo) VALUES' +
-                    "(1, 'ana29@gmail.es', 'Ana29', '1234', 0)," +
+                    "(1, 'ana@gmail.com', 'Ana29', '1234', 0)," +
                     "(1, 'juan@gmail.com', 'juan_guay', '1234', 0)," +
-                    "(1, 'george.blunt@gmail.com', 'GeorgeBlunt', '1234', 1)," +
-                    "(1, 'matilda.perfe@pm.com', 'Mtilda', '1234', 0)";
+                    "(1, 'carlos@gmail.com', 'charless', '1234', 1)," +
+                    "(1, 'matilda@gmail.com', 'Mtilda', '1234', 0)";
 
 console.log(llenarTablaUser);
 
@@ -135,6 +135,7 @@ const crearTablaEventGroup = 'CREATE TABLE festgangs.eventgroup (' +
                     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
                     'event_id INT NOT NULL, ' +
                     'leader INT NOT NULL, ' +
+                    'max_users INT NOT NULL check (max_users BETWEEN 2 AND 50), ' +
                     'FOREIGN KEY (event_id) REFERENCES event(id), ' +
                     'FOREIGN KEY (leader) REFERENCES user(id)' +
                     ');';
