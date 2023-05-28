@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-6">
                                 <h3>Ubicación</h3>
-                                <p class="text-nowrap">
+                                <p>
                                     <%= evento.location %>, <%= evento.city %>, <%= evento.country %></p>
                             </div>
                         </div>
@@ -75,7 +75,12 @@
 
                             <div class="form-group mt-3">
                                 <label for="maxParticipants">Número máximo de participantes</label>
-                                <input type="number" class="form-control" name="maxParticipants" id="maxParticipants">    
+                                <input type="number"
+                                 class="form-control"
+                                  name="maxParticipants"
+                                   id="maxParticipants"
+                                   min="1"
+                                   max="50">    
                             </div>
 
                             <div id="radioAccess" class="mt-4 d-flex justify-content-around">
@@ -90,6 +95,8 @@
                                     <label for="freeAccess" class="form-check-label">Pedir permiso al creador</label>
                                 </div>
                             </div>
+
+                            <p id="message"></p>
 
                             <button class="btn btn-primary mt-4">Crear grupo</button>
 
