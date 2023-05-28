@@ -43,6 +43,9 @@ function submitForm(user){
 
             $('#message').text('Algo ha salido mal :( Inténtalo más tarde');
         });
+    }else{
+        $('#message').text('El número de partcipantes debe ser entre 2 y 50');
+
     }
 
 }
