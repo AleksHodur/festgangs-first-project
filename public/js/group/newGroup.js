@@ -58,5 +58,5 @@ function newSuccess(user){
     $(info).attr('class', 'text-success');
     $(info).text('Grupo de ' + user.name + ' creado con éxito');
 
-    $('#newForm').appnd(info);
+    $('#newForm').append(info);
 }

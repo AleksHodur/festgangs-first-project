@@ -73,10 +73,10 @@ $(document).ready(function(){
             $(date).attr('class', 'ml-3')
             $(datosEvento).append(date);
 
-            let groups = await getInfoGroups(evento.id);
-            let infoGroups = getInfoGroups(groups);
+/*             let groups = await getGroups(evento.id);
+            let infoGroups = getInfoGroups(groups); */
 
-            /* let infoGroups = $('<div></div>');
+            let infoGroups = $('<div></div>');
             $(infoGroups).attr('class', 'col mt-3');
             let messageGroups = $('<p></p>');
             $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
@@ -84,7 +84,7 @@ $(document).ready(function(){
             $(newGroup).attr('class', 'btn btn-primary');
             $(newGroup).attr('href', '/group/new/' + evento.id);
             $(newGroup).text('Crear grupo');
-            $(infoGroups).append(messageGroups, newGroup); */
+            $(infoGroups).append(messageGroups, newGroup);
 
             $(newEvent).append(infoGroups);
 
@@ -112,6 +112,8 @@ function getZero(fecha){
 async function getGroups(id){
 
     $.get('/group/byEvent/' + id, function(data, status){
+        console.log('from getgroups event.js front-end');
+        console.log(data);
         return data;
     })
     .fail(function(error){
@@ -125,7 +127,7 @@ function getInfoGroups(groups){
     let infoGroups = $('<div></div>');
     $(infoGroups).attr('class', 'col mt-3');
     let messageGroups = $('<p></p>');
-     $(infoGroups).append(messageGroups);
+    $(infoGroups).append(messageGroups);
 
 
     if(groups == null){

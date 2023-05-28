@@ -34,28 +34,11 @@ const group_new = async (request, response) => {
     }
 }
 
-function getZero(fecha){
-
-    if(fecha < 10){
-        return '0' + fecha;
-    }else{
-        return fecha;
-    }
-}
-
 const group_new_form = async (request, response) => {
 
     let evento = await eventDAO.getById(request.params.id);
     console.log('evento desde new form controller');
     console.log(evento);
-    
-/*     let fechaFormato = new Date(evento.date);
-    let textoFecha = getZero(fechaFormato.getDate()) +
-        '/' + getZero(fechaFormato.getMonth() + 1) + '/' + fechaFormato.getFullYear();
-
-    evento.date = textoFecha;
-    console.log('evento con fecha nueva desde new form controller');
-    console.log(evento); */
 
     if(evento){
         response.render('group/groupForm', {title: 'Crear grupo', evento: evento});
@@ -64,7 +47,19 @@ const group_new_form = async (request, response) => {
     }
 }
 
+const groups_by_event = async (request, response) => {
+
+    let groups = await groupDAO.getByEvent(request.params.id);
+
+    if(groups != null){
+        response.status(200).json(groups);
+    }else{
+        response.status(500).json({message: 'No hay grupos'});
+    }
+}
+
 module.exports = {
     group_new,
-    group_new_form
+    group_new_form,
+    groups_by_event
 };

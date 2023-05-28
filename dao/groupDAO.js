@@ -41,11 +41,15 @@ const newGroup = async (event_id, leader, max_users) => {
     const sql = 'INSERT INTO festgangs.eventgroup (event_id, leader, max_users) VALUES (?, ?, ?)';
     const args = [event_id, leader, max_users];
 
+    const sql2 = 'SELECT * FROM festgangs.eventgroup ORDER BY id DESC LIMIT 1';
+
     console.log('contenido de args');
     console.log(args);
 
     try{
-        const row = await query(sql, args);
+        await query(sql, args);
+        const row = await query(sql2);
+
         const fields = row[0];
         return groupModel(fields.id, fields.event_id, fields.leader, fields.max_users);
     
@@ -54,7 +58,29 @@ const newGroup = async (event_id, leader, max_users) => {
     }
 }
 
+const getByEvent = async (event_id) => {
+
+    const sql = 'SELECT * FROM festgangs.eventgroup WHERE event_id = ?';
+    const args = [event_id];
+
+    try{
+        const rows = await query(sql, args);
+        let groups = [];
+
+        rows.forEach(row => {
+            groups.push(groupModel(row.id, row.event_id, row.leader,
+                row.max_users));
+        });
+
+        return groups;
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     getByEventAndLeader,
-    newGroup
+    newGroup,
+    getByEvent
 };
