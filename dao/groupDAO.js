@@ -36,7 +36,7 @@ const getByEventAndLeader = async (event_id, leader) => {
     }
 }
 
-const group_new = async (event_id, leader) => {
+const newGroup = async (event_id, leader) => {
 
     const sql = 'INSERT INTO festgangs.group (event_id, leader) VALUES (?, ?)';
     const args = [event_id, leader];
@@ -50,3 +50,8 @@ const group_new = async (event_id, leader) => {
         console.error(error);
     }
 }
+
+module.exports = {
+    getByEventAndLeader,
+    newGroup
+};

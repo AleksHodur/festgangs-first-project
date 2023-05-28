@@ -20,7 +20,7 @@ function submitForm(user){
 
     if(groupData.max_users >= 2 && groupData.max_users <= 10){
 
-        $.post('group/new', groupData, function(data, status){
+        $.post('/group/', groupData, function(data, status){
 
             if(data.success){
                 newSuccess(user);

@@ -16,12 +16,12 @@ const group_new = async (request, response) => {
                 if(group){
                     response.status(201).json({message: 'Grupo creado con éxito', success: true});
                 }else{
-                    response.status(500).json({message: 'No se ha podido crear el grupo', success: false});
+                    response.status(500).json({message: 'No se ha podido crear el grupo :(', success: false});
                 }
 
             }catch(error){
                 console.error(error);
-                response.status(500).json({message: 'No se ha podido crear el grupo', success: false});
+                response.status(500).json({message: 'No se ha podido crear el grupo :(', success: false});
             }
 
         }else{
@@ -29,7 +29,7 @@ const group_new = async (request, response) => {
         }
     }catch(error){
         console.error(error);
-        response.status(500).json({message: 'No se ha podido crear el grupo', success: false});
+        response.status(500).json({message: 'No se ha podido crear el grupo :(', success: false});
 
     }
 }
