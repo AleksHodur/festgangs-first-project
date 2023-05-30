@@ -73,10 +73,25 @@ $(document).ready(function(){
             $(date).attr('class', 'ml-3')
             $(datosEvento).append(date);
 
-/*             let groups = await getGroups(evento.id);
-            let infoGroups = getInfoGroups(groups); */
+            $.get('/group/byEvent/' + id, function(data, status){
+                console.log('from getgroups event.js front-end');
+                console.log(data);
 
-            let infoGroups = $('<div></div>');
+                let groups = data;
+                let infoGroups = getInfoGroups(groups);
+
+                $(newEvent).append(infoGroups);
+
+                $(divEvents).append(newEvent);
+                $(divEvents).append('<hr>');
+                
+            })
+            .fail(function(error){
+                console.log(error);
+            });
+
+
+            /* let infoGroups = $('<div></div>');
             $(infoGroups).attr('class', 'col mt-3');
             let messageGroups = $('<p></p>');
             $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
@@ -84,12 +99,12 @@ $(document).ready(function(){
             $(newGroup).attr('class', 'btn btn-primary');
             $(newGroup).attr('href', '/group/new/' + evento.id);
             $(newGroup).text('Crear grupo');
-            $(infoGroups).append(messageGroups, newGroup);
+            $(infoGroups).append(messageGroups, newGroup); */
 
-            $(newEvent).append(infoGroups);
+/*             $(newEvent).append(infoGroups);
 
             $(divEvents).append(newEvent);
-            $(divEvents).append('<hr>');
+            $(divEvents).append('<hr>'); */
 
         });
     })
@@ -122,7 +137,7 @@ async function getGroups(id){
 
 }
 
-function getInfoGroups(groups){
+async function getInfoGroups(groups){
 
     let infoGroups = $('<div></div>');
     $(infoGroups).attr('class', 'col mt-3');
