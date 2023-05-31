@@ -78,7 +78,33 @@ $(document).ready(function(){
                 console.log(data);
 
                 let groups = data;
-                let infoGroups = getInfoGroups(groups);
+                //let infoGroups = getInfoGroups(groups, evento.id);
+
+                let infoGroups = $('<div></div>');
+                $(infoGroups).attr('class', 'col mt-3');
+                let messageGroups = $('<p></p>');
+                $(infoGroups).append(messageGroups);
+            
+            
+                if(groups == null || groups.length < 1){
+                    $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
+                }else{
+                    $(messageGroups).text('Este evento tiene ' + groups.length + ' grupo(s) activo(s)');
+                    
+                    let checkGroups = $('<a></a>');
+                    $(checkGroups).attr('class', 'btn btn-success');
+                    $(checkGroups).attr('href', '#');
+                    $(checkGroups).text('Ver grupos');
+            
+                    $(infoGroups).append(checkGroups);
+            
+                }
+            
+                let newGroup = $('<a></a>');
+                $(newGroup).attr('class', 'btn btn-primary');
+                $(newGroup).attr('href', '/group/new/' + evento.id);
+                $(newGroup).text('Crear grupo');
+                $(infoGroups).append(newGroup);
 
                 $(newEvent).append(infoGroups);
 
@@ -137,7 +163,7 @@ async function getGroups(id){
 
 }
 
-async function getInfoGroups(groups){
+async function getInfoGroups(groups, id){
 
     let infoGroups = $('<div></div>');
     $(infoGroups).attr('class', 'col mt-3');
@@ -145,7 +171,7 @@ async function getInfoGroups(groups){
     $(infoGroups).append(messageGroups);
 
 
-    if(groups == null || groups.length < 0){
+    if(groups == null || groups.length < 1){
         $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
     }else{
         $(messageGroups).text('Este evento tiene ' + groups.length + ' grupo(s) activo(s)');
@@ -161,9 +187,9 @@ async function getInfoGroups(groups){
 
     let newGroup = $('<a></a>');
     $(newGroup).attr('class', 'btn btn-primary');
-    $(newGroup).attr('href', '/group/new/' + evento.id);
+    $(newGroup).attr('href', '/group/new/' + id);
     $(newGroup).text('Crear grupo');
     $(infoGroups).append(newGroup);
 
-    return infoGroups;
+    return $(infoGroups).html();
 }
