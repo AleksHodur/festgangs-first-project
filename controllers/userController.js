@@ -16,6 +16,42 @@ const user_by_id = async (request, response) => {
     const id = request.params.id;
 }
 
+const user_by_name = async (request, response) => {
+
+    const username = request.params.username;
+
+    try{
+        const user = await userDAO.getUserByName(username);
+
+        if(user){
+            response.status(200).json({found: true, message: 'El nombre de usuario no está disponible'});
+        }else{
+            response.status(200).json({found: true, message: ''});
+        }
+    }catch(error){
+        console.log(error);
+        response.status(500).json({error: 'Internal server error'});
+    }
+}
+
+const user_by_email = async (request, response) => {
+
+    const email = request.params.email;
+
+    try{
+        const user = await userDAO.getUserByEmail(email);
+
+        if(user){
+            response.status(200).json({found: true, message: 'Ya existe un usuario con este correo electrónico'});
+        }else{
+            response.status(200).json({found: true, message: ''});
+        }
+    }catch(error){
+        console.log(error);
+        response.status(500).json({error: 'Internal server error'});
+    }
+}
+
 const user_update = async (request, response) => {
 
     console.log('en el controlador de user update');
@@ -53,4 +89,11 @@ const user_update = async (request, response) => {
     }
 }
 
-module.exports = {user_get_in_session, user_show_profile, user_by_id, user_update};
+module.exports = {
+    user_get_in_session,
+    user_show_profile,
+    user_by_id,
+    user_by_name,
+    user_by_email,
+    user_update
+};

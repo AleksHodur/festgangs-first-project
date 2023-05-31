@@ -7,8 +7,12 @@ router.get('/inSession', userController.user_get_in_session);
 
 router.get('/profile', userController.user_show_profile)
 
-router.get('/{id}', userController.user_by_id);
+router.get('/id/:id', userController.user_by_id);
 
-router.put('/:id', userController.user_update)
+router.get('/name/:username', userController.user_by_name);
+
+router.get('/email/:email', userController.user_by_email);
+
+router.put('/:id', userController.user_update);
 
 module.exports = router;
