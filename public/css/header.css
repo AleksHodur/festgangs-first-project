@@ -1,0 +1,8 @@
+@font-face{
+    font-family: Sofia;
+    src: url('/fonts/Sofia-Regular.ttf');
+}
+
+#title h1{
+    font-family: Sofia, Garamond, Georgia, serif;
+}

@@ -92,7 +92,7 @@ $(document).ready(function(){
                     $(messageGroups).text('Este evento tiene ' + groups.length + ' grupo(s) activo(s)');
                     
                     let checkGroups = $('<a></a>');
-                    $(checkGroups).attr('class', 'btn btn-success');
+                    $(checkGroups).attr('class', 'btn btn-success mr-3');
                     $(checkGroups).attr('href', '#');
                     $(checkGroups).text('Ver grupos');
             
