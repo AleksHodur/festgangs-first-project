@@ -6,6 +6,7 @@ const loginRoutes = require('./routes/loginRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const userRoutes = require('./routes/userRoutes');
 const groupRoutes = require('./routes/groupRoutes');
+const signupRoutes = require('./routes/signupRoutes');
 
 //express app
 const app = express();
@@ -49,6 +50,15 @@ app.use(session({
   saveUninitialized: true
 }))
 
+//Comprobación de sesión. No funciona: bucle infinito
+/* app.use(function(request, response, next){
+  if(request.session.user == null){
+    return response.redirect('/login');
+  }else{
+    next();
+  }
+}); */
+
 app.get('/', (request, response) => {
     if(request.session.user){
       response.render('home', {title: 'Inicio', user: request.session.user});
@@ -74,3 +84,5 @@ app.use('/event', eventRoutes);
 app.use('/user', userRoutes);
 
 app.use('/group', groupRoutes);
+
+app.use('/signup', signupRoutes);
