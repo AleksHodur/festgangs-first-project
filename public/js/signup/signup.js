@@ -19,6 +19,8 @@ $(document).ready(function(){
                             $('#message').text(data.message);
                         }else{
 
+                            console.log('Enhorabuena, nombre único!');
+
                             $.get('/user/exists/email/' + datosUsuario.email, function(data, status){
 
                                 if(data.found){
@@ -31,10 +33,22 @@ $(document).ready(function(){
                                             console.log('success');
                                             console.log(data);
                                         }
+
+                                    }).fail(function(){
+                                        $('#message').text('Algo ha salido mal :( Inténtalo más tarde');
+                                        console.log('Fallo en post');
                                     });
                                 }
-                            })
+
+                            }).fail(function(){
+                                $('#message').text('Algo ha salido mal :( Inténtalo más tarde');
+                                console.log('Fallo en get email');
+                            });
                         }
+
+                    }).fail(function(){
+                        $('#message').text('Algo ha salido mal :( Inténtalo más tarde');
+                        console.log('Fallo en get name');
                     });
 
 

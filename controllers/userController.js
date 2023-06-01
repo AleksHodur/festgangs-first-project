@@ -21,12 +21,12 @@ const user_by_name = async (request, response) => {
     const username = request.params.username;
 
     try{
-        const user = await userDAO.getUserByName(username);
+        const user = await userDAO.getByName(username);
 
         if(user){
             response.status(200).json({found: true, message: 'El nombre de usuario no está disponible'});
         }else{
-            response.status(200).json({found: true, message: ''});
+            response.status(200).json({found: false, message: ''});
         }
     }catch(error){
         console.log(error);
@@ -39,12 +39,12 @@ const user_by_email = async (request, response) => {
     const email = request.params.email;
 
     try{
-        const user = await userDAO.getUserByEmail(email);
+        const user = await userDAO.getByEmail(email);
 
         if(user){
             response.status(200).json({found: true, message: 'Ya existe un usuario con este correo electrónico'});
         }else{
-            response.status(200).json({found: true, message: ''});
+            response.status(200).json({found: false, message: ''});
         }
     }catch(error){
         console.log(error);

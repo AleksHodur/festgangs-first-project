@@ -61,6 +61,83 @@ const getById = async (id) => {
   }
 }
 
+const getByName = async (username) => {
+
+  const sql = 'SELECT * FROM festgangs.user WHERE name = ?';
+  const args = [username];
+
+  try{
+    const rows = await query(sql, args);
+
+    if(rows > 0){
+      const fields = rows[0];
+      console.log('Log fields');
+      console.log(fields);
+
+      return userModel(fields.id, fields.type, fields.email, fields.name,
+        fields.password, fields.profile_photo, fields.bio, fields.atists,
+        fields.genres);
+
+    }else{
+      console.log('El usuario no existe');
+      return null;
+    }
+
+  }catch(error){
+    console.error(error);
+    return null;
+  }
+}
+
+const getByEmail = async (email) => {
+
+  const sql = 'SELECT * FROM festgangs.user WHERE email = ?';
+  const args = [email];
+
+  try{
+    const rows = await query(sql, args);
+
+    if(rows > 0){
+      const fields = rows[0];
+      console.log('Log fields');
+      console.log(fields);
+
+      return userModel(fields.id, fields.type, fields.email, fields.name,
+        fields.password, fields.profile_photo, fields.bio, fields.atists,
+        fields.genres);
+
+    }else{
+      console.log('El usuario no existe');
+      return null;
+    }
+
+  }catch(error){
+    console.error(error);
+    return null;
+  }
+}
+
+const createUser = async (username, email, password) => {
+
+  const sql = 'INSERT INTO festgangs.user (email, name, password) ' +
+    'VALUES (?, ?, ?)';
+  const args = [email, username, password];
+
+  try{
+    const rows = await query(sql, args);
+    const fields = rows[0];
+
+    return userModel(fields.id, fields.type, fields.email, fields.name,
+      fields.password, fields.profile_photo, fields.bio, fields.artists,
+      fields.genres);
+
+  }catch(error){
+    console.error(error);
+    return null;
+  }
+
+}
+
 const update = async (user) => {
 
   console.log('en useer update dao');
@@ -140,5 +217,8 @@ async function queryUpdate(sql, args){
 module.exports = {
   getUserByEmailAndPassword,
   getById,
+  getByName,
+  getByEmail,
+  createUser,
   update
 };
