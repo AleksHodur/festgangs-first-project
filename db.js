@@ -74,11 +74,11 @@ conexionBD.query(llenarTablaUserType, (err, result) => {
 
 const crearTablaUser = 'CREATE TABLE festgangs.user (' +
                     'id INT AUTO_INCREMENT PRIMARY KEY,' +
-                    'type INT NOT NULL,' +
+                    'type INT NOT NULL DEFAULT 1,' +
                     'email VARCHAR(50) NOT NULL,' +
                     'name VARCHAR(30) NOT NULL,' +
                     'password VARCHAR(30) NOT NULL,' +
-                    'profile_photo BOOL NOT NULL,' +
+                    'profile_photo BOOL NOT NULL DEFAULT 0,' +
                     'bio VARCHAR(500),' +
                     'artists VARCHAR(500),' +
                     'genres VARCHAR(500),' +
