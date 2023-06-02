@@ -93,7 +93,7 @@ $(document).ready(function(){
                     
                     let checkGroups = $('<a></a>');
                     $(checkGroups).attr('class', 'btn btn-success mr-3');
-                    $(checkGroups).attr('href', '#');
+                    $(checkGroups).attr('href', '/event/' + evento.id);
                     $(checkGroups).text('Ver grupos');
             
                     $(infoGroups).append(checkGroups);
@@ -102,7 +102,7 @@ $(document).ready(function(){
             
                 let newGroup = $('<a></a>');
                 $(newGroup).attr('class', 'btn btn-primary');
-                $(newGroup).attr('href', '/group/new/' + evento.id);
+                $(newGroup).attr('href', '/event/' + evento.id);
                 $(newGroup).text('Crear grupo');
                 $(infoGroups).append(newGroup);
 
