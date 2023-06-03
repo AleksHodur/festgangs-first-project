@@ -10,33 +10,44 @@ $(document).ready( function(){
             let newGroup = $('<div></div>');
             $(newGroup).attr('class', 'row');
 
+            let col = $('<div></div>');
+            $(col).attr('class', 'col');
+            $(newGroup).append(col);
+
             let title = $('<h1></h1>');
             //let titleText = getTitle(grupo.leader);
             //$(title).text(titleText);
-            $(newGroup).append(title);
+            $(col).append(title);
 
             $.get('/user/' + grupo.leader, function(data, status){
                 console.log('en title get');
-                let titleText = 'Grupo de ' + data.name;
+                console.log(data);
+
+                let user = data.user;
+
+                let titleText = 'Grupo de ' + user.name;
                 $(title).text(titleText);
 
                 $.get('/user/inGroup/' + grupo.id, function(data, status){
                     console.log('en users get');
+                    console.log(data);
+
+                    let users = data.users;
             
-                    let numActualUsers = data.length;
+                    let numActualUsers = users.length;
                     let numMaxUsers = grupo.max_users;
         
                     let maxUsers =$('<p><b>Límite de usuarios: </b>' +
                         numMaxUsers + '</p>');
-                    $(newGroup).append(maxUsers);
+                    $(col).append(maxUsers);
         
                     let actualUsers = $('<p><b>Usuarios actuales: </b>' + 
                         numActualUsers + '</p>');
-                    $(newGroup).append(actualUsers);
+                    $(col).append(actualUsers);
         
                     let joinButton = $('<button></button>');
                     $(joinButton).text('Unirse al grupo');
-                    $(newGroup).append(joinButton);
+                    $(col).append(joinButton);
                     
                     if(numActualUsers < numMaxUsers){
                         $(joinButton).attr('class', 'btn btn-success');
@@ -45,6 +56,7 @@ $(document).ready( function(){
                     }
         
                     $(divGroups).append(newGroup);
+                    $(divGroups).append('<hr>');
                 })
                 .fail(function(error){
                     console.log(error);
