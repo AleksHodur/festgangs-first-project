@@ -63,7 +63,6 @@
                                 <p>
                                     <%= evento.location %>, <%= evento.city %>, <%= evento.country %></p>
                             </div>
-                            <p id="eventId" hidden><%= evento.id %></p>
                         </div>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                                    max="50">    
                             </div>
 
-                            <div id="radioAccess" class="mt-4 d-flex justify-content-around">
+<!--                             <div id="radioAccess" class="mt-4 d-flex justify-content-around">
 
                                 <div class="form-check">
                                     <input type="radio" class="form-check-input" name="typeAccess" id="freeAccess">
@@ -100,7 +99,7 @@
                                     <input type="radio" class="form-check-input" name="typeAccess" id="freeAccess">
                                     <label for="freeAccess" class="form-check-label">Pedir permiso al creador</label>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <input type="hidden" name="eventId" id="eventId" value="<%= evento.id %>">
 

@@ -20,10 +20,13 @@ $(document).ready(function(){
 function submitForm(user){
 
     let groupData = {
-        event_id: $('#eventId').val(),
+        event_id: $('#eventId').val(), //IMPORTANTE BUG
         leader: user.id,
         max_users: $('#maxUsers').val()
     };
+
+    console.log('groupData');
+    console.log(groupData);
 
     if(groupData.max_users >= 2 && groupData.max_users <= 10){
 
