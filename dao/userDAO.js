@@ -48,12 +48,22 @@ const getById = async (id) => {
 
   try{
     const rows = await query(sql, args);
-    const fields = rows[0];
-    console.log('Log fields');
-    console.log(fields);
-    return userModel(fields.id, fields.type, fields.email, fields.name,
-      fields.password, fields.profile_photo, fields.bio, fields.atists,
-      fields.genres);
+    console.log('en get by id usercontroller. Rows:');
+    console.log(rows);
+
+    if(rows.length > 0){
+      const fields = rows[0];
+      console.log('Log fields');
+      console.log(fields);
+
+      return userModel(fields.id, fields.type, fields.email, fields.name,
+        fields.password, fields.profile_photo, fields.bio, fields.atists,
+        fields.genres);
+
+    }else{
+      console.log('El usuario no existe');
+      return null;
+    }
 
   }catch(error){
     console.error(error);
@@ -214,11 +224,27 @@ async function queryUpdate(sql, args){
   }
 }
 
+const getIdByGroup = async (groupId) => {
+
+  const sql = 'SELECT user_id FROM festgangs.usergroup WHERE group_id = ?';
+  const args = [groupId];
+
+  try{
+    const rows = await query(sql, args);
+    return rows;
+
+  }catch(error){
+    console.error(error);
+    return null;
+  }
+}
+
 module.exports = {
   getUserByEmailAndPassword,
   getById,
   getByName,
   getByEmail,
   createUser,
-  update
+  update,
+  getIdByGroup
 };

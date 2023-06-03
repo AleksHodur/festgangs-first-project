@@ -3,7 +3,8 @@
 <head>
     <%- include('../partials/head.ejs') %>
 
-    <script src="/js/group/newGroup.js"></script>
+    <script src="/js/group/newGroup.js" defer></script>
+    <script src="/js/event/showGroups.js" defer></script>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -62,12 +63,17 @@
                                 <p>
                                     <%= evento.location %>, <%= evento.city %>, <%= evento.country %></p>
                             </div>
+                            <p id="eventId" hidden><%= evento.id %></p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-5" id="secondHalf">
+                <div class="row">
+                    <div id="groups" class="col"></div>
+                </div>
+
                 <div class="row">
                     <div id="newForm" class="col-12">
                         <form>

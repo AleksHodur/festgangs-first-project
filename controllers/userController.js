@@ -14,6 +14,19 @@ const user_show_profile = (request, response) => {
 const user_by_id = async (request, response) => {
 
     const id = request.params.id;
+
+    try{
+        const user = await userDAO.getById(id);
+
+        if(user){
+            response.status(200).json({user});
+        }else{
+            response.status(500).json({error: 'Internal server error'});
+        }
+    }catch(error){
+        console.log(error);
+        response.status(500).json({error: 'Internal server error'});
+    }
 }
 
 const user_by_name = async (request, response) => {
@@ -89,11 +102,27 @@ const user_update = async (request, response) => {
     }
 }
 
+const user_get_id_by_group = async (request, response) => {
+
+    console.log('En el controlador de get id by group');
+    const groupId = request.params.group;
+
+    try{
+        const users = await userDAO.getIdByGroup(groupId);
+        response.status(200).json({users});
+
+    }catch(error){
+        console.log(error);
+        response.status(500).json({error: 'Internal server error'});
+    }
+}
+
 module.exports = {
     user_get_in_session,
     user_show_profile,
     user_by_id,
     user_by_name,
     user_by_email,
-    user_update
+    user_update,
+    user_get_id_by_group
 };
