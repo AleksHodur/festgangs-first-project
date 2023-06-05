@@ -58,8 +58,18 @@ const groups_by_event = async (request, response) => {
     }
 }
 
+const group_show_my = (request, response) => {
+    response.status(200).render('group/myGroups', {title: 'Mis grupos'});
+}
+
+const group_by_id = (request, response) => {
+    response.status(200).render('group/groupPage', {title: 'Grupo de Ana29'});
+}
+
 module.exports = {
     group_new,
     group_new_form,
-    groups_by_event
+    groups_by_event,
+    group_show_my,
+    group_by_id
 };

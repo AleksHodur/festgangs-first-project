@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head.ejs') %>
+
+    <style>
+        .ana{
+            background-image: url("/userFiles/1/img/profile/profile.jpg");
+        }
+
+        .carlos{
+            background-image: url("/userFiles/3/img/profile/profile.jpg");
+
+        }
+
+        .matilda{
+            background-image: url("/userFiles/4/img/profile/profile.jpg");
+
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <%- include('../partials/nav.ejs') %>
+
+    <main class="container-fluid mt-3">
+        <div class="row">
+            <div id="firstHalf" class="col-6 ml-3">
+                <h1>Grupo de Ana29</h1>
+
+                <div class="col">
+                        <div class="row mt-3 mb-3">
+                            <h3>Foro de grupo</h3>
+                        </div>
+                        <div class="col" id="forum">
+                            <div class="row mb-3 mx-3">
+                                <div class="col-3">
+                                    <div class="container-fluid container-centered">
+                                        <div class="row">
+                                            <div class="rounded-circle ana"
+                                            style="background-size: cover; background-position: center;
+                                            min-height: 80px; min-width: 80px;">&nbsp;</div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col bg-light">
+                                    <h6><b>Ana29</b></h6>
+                                    <p class="m-3">¡hola a todos!</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3 mx-3">
+                                <div class="col-3">
+                                    <div class="container-fluid container-centered">
+                                        <div class="row">
+                                            <div class="rounded-circle carlos"
+                                            style="background-size: cover; background-position: center;
+                                            min-height: 80px; min-width: 80px;">&nbsp;</div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col bg-light">
+                                    <h6><b>charless</b></h6>
+                                    <p class="m-3">qué ganas de ir!</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3 mx-3">
+                                <div class="col-3">
+                                    <div class="container-fluid container-centered">
+                                        <div class="row">
+                                            <div class="rounded-circle matilda"
+                                            style="background-size: cover; background-position: center;
+                                            min-height: 80px; min-width: 80px;">&nbsp;</div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col bg-light">
+                                    <h6><b>Mtilda</b></h6>
+                                    <p class="m-3">dónde quedamos?</p>
+                                </div>
+                            </div>
+                            <div class="row m-3">
+                                <textarea name="new" id="new" class="form-control"></textarea>
+                                <button class="btn btn-primary mt-3
+                                ">Enviar</button>
+                        </div>
+                </div>
+                </div>
+            </div>
+            <div id="secondHalf" class="col">
+                
+                <div class="col-12 d-flex">
+                    <div class="col-4">
+                        <img
+                        src="/eventFiles/3/cover.jpg"
+                        alt="Riverland 2023"
+                        class="img-fluid img-thumbnail"
+                        id="cover">
+                    </div>
+    
+                    <div class="col ml-6">
+                        <div class="row text-nowrap text-truncate">
+                            <h1>Riverland 2023</h1>
+                        </div>
+                        <div class="row mt-3">
+                            <p><b>Fecha: </b>24/08/2023</p>
+                        </div>
+
+                    </div>
+                </div>
+
+    
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="row ml-3">
+                            <div class="col-6">
+                                <h3>Artista(s)</h3>
+                                <p>Sticky M.A., Yung Beef, C.R.O, Delaossa, Cruz Cafuné, Kidd Keo</p>
+                            </div>
+                            <div class="col-6">
+                                <h3>Ubicación</h3>
+                                <p>
+                                    Valle de la Música, Arriondas, España</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

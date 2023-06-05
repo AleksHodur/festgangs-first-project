@@ -1,6 +1,6 @@
 $(document).ready( function(){
 
-    let eventId = $('#eventId').text();
+    let eventId = $('#eventIdForShow').text();
 
     $.get('/group/byEvent/' + eventId, function(data, status){
         let divGroups = $('#groups');
