@@ -58,17 +58,31 @@ const groups_by_event = async (request, response) => {
     }
 }
 
-const group_show_my = async (request, response) => {
+const group_show_my = (request, response) => {
+
+/*    const user = request.session.user;
+     const leadGroups = await groupDAO.getByLeader(user.id);
+    const participantGroups = await groupDAO.getByParticipant(user.id); */
+
+    //if(user && leadGroups && participantGroups){
+        response.status(200).render('group/myGroups', {title: 'Mis grupos'/* , leadGroups, participantGroups */});
+/*     }else{
+        response.status(500).render('error/500', {title: 'Error 500'});
+    } */
+}
+
+const group_get_my = async (request, response) => {
 
     const user = request.session.user;
-    const leaderGroups = await groupDAO.getByLeader(user.id);
+    const leadGroups = await groupDAO.getByLeader(user.id);
     const participantGroups = await groupDAO.getByParticipant(user.id);
 
-    if(user && leaderGroups && participantGroups){
-        response.status(200).render('group/myGroups', {title: 'Mis grupos', leaderGroups, participantGroups});
+    if(user && leadGroups && participantGroups){
+        response.status(200).json({leadGroups, participantGroups});
     }else{
         response.status(500).render('error/500', {title: 'Error 500'});
     }
+    
 }
 
 const group_by_id = (request, response) => {
@@ -80,5 +94,6 @@ module.exports = {
     group_new_form,
     groups_by_event,
     group_show_my,
+    group_get_my,
     group_by_id
 };

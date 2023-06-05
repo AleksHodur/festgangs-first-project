@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
     <%- include('../partials/head.ejs') %>
+
+<!--     <script src="/js/group/showMyGroups.js" defer></script> -->
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -12,18 +14,26 @@
         <div class="row">
             <div id="firstHalf" class="col-6 ml-3">
                 <h1 class="mb-3">Grupos en los que eres lead</h1>
-                <div class="row mt-3">
+<!--                 <div class="row mt-3">
                     <div class="col d-flex">
                         <h3>Grupo de charless para Hombres G</h3>
                         <button class="btn btn-primary ml-3">Entrar</button>
                     </div>
                     <hr>
+                </div> -->
+
+                <div id="leadGroups" class="col">
+<!--                     <%
+                        if(leadGroups > 0){
+                            leadGroups.forEach(lead => { )
+
+                        } -->
                 </div>
 
             </div>
             <div id="secondHalf" class="col">
                 <h1>Grupos en los que eres participante</h1>
-                <div class="row mt-3">
+<!--                 <div class="row mt-3">
                     <div class="col d-flex">
                         <h3>Grupo de juan_guay para Skinyz</h3>
                         <button class="btn btn-primary ml-3">Entrar</button>
@@ -36,7 +46,9 @@
                         <button class="btn btn-primary ml-3">Entrar</button>
                     </div>
                     <hr>
-                </div>
+                </div> -->
+
+                <div id="participantGroups" class="col"></div>
 
             </div>
         </div>

@@ -1,6 +1,6 @@
 const groupModel = require('../models/groupModel');
 const mysql = require('mysql');
-const { getById } = require('./eventDAO');
+//const eventDAO = require('./eventDAO'); y esto???
 
 const pool = mysql.createPool({
     connectionLimit: 10,
