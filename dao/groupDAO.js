@@ -1,5 +1,6 @@
 const groupModel = require('../models/groupModel');
 const mysql = require('mysql');
+const { getById } = require('./eventDAO');
 
 const pool = mysql.createPool({
     connectionLimit: 10,
@@ -79,8 +80,72 @@ const getByEvent = async (event_id) => {
     }
 }
 
+const getById = async (id) => {
+
+    const sql = 'SELECT * FROM festgangs.eventgroup WHERE id = ?';
+    const args = [id];
+
+    try{
+        const rows = await query(sql, args);
+        const fields = rows[0];
+
+        let group = groupModel(fields.id, fields.event_id, fields.leader,
+                fields.max_users);
+
+        return group;
+
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const getByLeader = async (id) => {
+
+    const sql = 'SELECT * FROM festgangs.eventgroup WHERE leader = ?';
+    const args = [id];
+
+    try{
+        const rows = await query(sql, args);
+        let groups = [];
+
+        rows.forEach(row => {
+            groups.push(groupModel(row.id, row.event_id, row.leader,
+                row.max_users));
+        });
+
+        return groups;
+
+    }catch(error){
+        console.log(error);
+        return null;
+    }
+}
+
+const getByParticipant = async (id) => {
+
+    let sql = 'SELECT group_id FROM festgangs.usergroup WHERE user_id = ?';
+    let args = [id];
+
+    try{
+        let rows = await query(sql, args);
+        let groups = [];
+
+        rows.forEach(async row => {
+            let group = await getById();
+            groups.push(group);
+        });
+
+    }catch(error){
+        console.log(error);
+        return null;
+    }
+}
+
 module.exports = {
     getByEventAndLeader,
     newGroup,
-    getByEvent
+    getByEvent,
+    getById,
+    getByLeader,
+    getByParticipant
 };
