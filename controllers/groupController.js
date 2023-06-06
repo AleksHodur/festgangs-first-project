@@ -71,7 +71,7 @@ const group_show_my = (request, response) => {
     } */
 }
 
-const group_get_my = async (request, response) => {
+const group_json_my = async (request, response) => {
 
     const user = request.session.user;
     const leadGroups = await groupDAO.getByLeader(user.id);
@@ -94,6 +94,6 @@ module.exports = {
     group_new_form,
     groups_by_event,
     group_show_my,
-    group_get_my,
+    group_json_my,
     group_by_id
 };

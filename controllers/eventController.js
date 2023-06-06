@@ -18,8 +18,22 @@ const event_get_by_id = async (request, response) => {
     }
 }
 
+const event_get_by_id_json = async (request, response) => {
+
+    let evento = await eventDAO.getById(request.params.id);
+    console.log('evento desde get by id controller');
+    console.log(evento);
+
+    if(evento){
+        response.status(200).json({evento: evento});
+    }else{
+        response.render('error/500', {title: 'Error 500'});
+    }
+}
+
 
 module.exports = {
     event_get_all,
-    event_get_by_id
+    event_get_by_id,
+    event_get_by_id_json
 };

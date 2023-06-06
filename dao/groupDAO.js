@@ -135,6 +135,8 @@ const getByParticipant = async (id) => {
             groups.push(group);
         });
 
+        return groups;
+
     }catch(error){
         console.log(error);
         return null;
