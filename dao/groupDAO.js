@@ -123,17 +123,18 @@ const getByLeader = async (id) => {
 
 const getByParticipant = async (id) => {
 
-    let sql = 'SELECT group_id FROM festgangs.usergroup WHERE user_id = ?';
+    let sql = 'SELECT * FROM festgangs.usergroup WHERE user_id = ?';
     let args = [id];
 
     try{
         let rows = await query(sql, args);
         let groups = [];
 
-        rows.forEach(async row => {
-            let group = await getById(row.group_id);
+        for(let i = 0; i < rows.length; i++){
+            let id = rows[i].group_id;
+            let group = await getById(id);
             groups.push(group);
-        });
+        }
 
         return groups;
 

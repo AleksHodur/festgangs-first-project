@@ -77,6 +77,9 @@ const group_json_my = async (request, response) => {
     const leadGroups = await groupDAO.getByLeader(user.id);
     const participantGroups = await groupDAO.getByParticipant(user.id);
 
+    console.log('this is participantGroups in the back CONTROLLER');
+    console.log(participantGroups);
+
     if(user && leadGroups && participantGroups){
         response.status(200).json({leadGroups, participantGroups});
     }else{
