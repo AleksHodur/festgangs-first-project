@@ -11,19 +11,21 @@ $(document).ready(function(){
         leadGroups.forEach(group => {
 
             let newGroup = $('<div></div>');
-            $(newGroup).attr('class', 'row');
+            $(newGroup).attr('class', 'row mt-3');
 
 /*             let textCol = $('<div></div>');
             $(textCol).attr('class', 'col');
             $(newEvent).append(textCol); */
 
-            let title = $('<h1></h1>');
+            let title = $('<h3></h3>');
             //$(title).text();
             $(newGroup).append(title);
             
             let button = $('<a></a>');
             $(button).attr('href', '/group/' + group.leader);
+            $(button).attr('class', 'btn btn-primary ml-3');
             $(button).text('Entrar');
+            $(newGroup).append(button);
 
             $.get('/user/' + group.leader, function(data, status){
 
@@ -36,6 +38,7 @@ $(document).ready(function(){
                     $(title).text('Grupo de ' + titleName + ' para ' + titleEvent);
 
                     $(leadDiv).append(newGroup);
+                    $(leadDiv).append('<hr>');
                 });
             });
         });
