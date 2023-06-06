@@ -89,11 +89,24 @@ const group_by_id = (request, response) => {
     response.status(200).render('group/groupPage', {title: 'Grupo de Ana29'});
 }
 
+const group_add_user = async (request, response) => {
+
+    const {user_id, group_id} = request.body;
+    const userGroup = await groupDAO.addUser(user_id, group_id);
+
+    if(userGroup){
+        response.status(200).json({message: 'Añadido al grupo'});
+    }else{
+        response.status(400).json({message: 'Fallo en el controlador al añadir usuario al grupo'});
+    }
+}
+
 module.exports = {
     group_new,
     group_new_form,
     groups_by_event,
     group_show_my,
     group_json_my,
-    group_by_id
+    group_by_id,
+    group_add_user
 };
