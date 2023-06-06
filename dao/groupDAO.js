@@ -131,7 +131,7 @@ const getByParticipant = async (id) => {
         let groups = [];
 
         rows.forEach(async row => {
-            let group = await getById();
+            let group = await getById(row.group_id);
             groups.push(group);
         });
 
