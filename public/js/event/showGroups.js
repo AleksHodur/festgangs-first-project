@@ -56,20 +56,21 @@ $(document).ready( function(){
 
                     }else{
         
-                        let linkJoin = $('<a></a>');
+/*                         let linkJoin = $('<a></a>');
                         $(linkJoin).attr('class', 'joinButton');
                         $(linkJoin).attr('href', '#');
                         $(linkJoin).val(grupo.id);
-                        $(col).append(linkJoin);
+                        $(col).append(linkJoin); */
 
                         let joinButton = $('<button></button>');
                         $(joinButton).text('Unirse al grupo');
-                        $(linkJoin).append(joinButton);
+                        //$(linkJoin).append(joinButton);
+                        $(joinButton).attr('class', 'btn btn-success joinButton');
+                        $(joinButton).val(grupo.id);
+                        $(col).append(joinButton);
                         
-                        if(numActualUsers < numMaxUsers){
-                            $(joinButton).attr('class', 'btn btn-success');
-                        }else{
-                            $(joinButton).attr('class', 'btn btn-success disabled');
+                        if(numActualUsers >= numMaxUsers){
+                            $(joinButton).attr('disabled', true);
                         }
                     }
         
