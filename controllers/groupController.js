@@ -1,5 +1,6 @@
 const groupDAO = require('../dao/groupDAO');
 const eventDAO =require('../dao/eventDAO');
+const userDAO = require('../dao/userDAO');
 
 const group_new = async (request, response) => {
 
@@ -88,8 +89,13 @@ const group_json_my = async (request, response) => {
     
 }
 
-const group_by_id = (request, response) => {
-    response.status(200).render('group/groupPage', {title: 'Grupo de Ana29'});
+const group_by_id = async (request, response) => {
+    const group_id = request.params.id;
+
+    const group = await groupDAO.getById(group_id);
+    const leader = await userDAO.getById(group.leader);
+
+    response.status(200).render('group/groupPage', {title: 'Grupo de ' + leader.name, group_id, leader});
 }
 
 const group_add_user = async (request, response) => {

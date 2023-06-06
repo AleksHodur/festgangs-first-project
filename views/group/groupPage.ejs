@@ -25,16 +25,18 @@
     <%- include('../partials/nav.ejs') %>
 
     <main class="container-fluid mt-3">
+        <p hidden><%= group_id %></p>
+
         <div class="row">
             <div id="firstHalf" class="col-6 ml-3">
-                <h1>Grupo de Ana29</h1>
+                <h1>Grupo de <span id="leaderTitle"><%= leader.name %></span></h1>
 
                 <div class="col">
                         <div class="row mt-3 mb-3">
                             <h3>Foro de grupo</h3>
                         </div>
                         <div class="col" id="forum">
-                            <div class="row mb-3 mx-3">
+                            <!-- <div class="row mb-3 mx-3">
                                 <div class="col-3">
                                     <div class="container-fluid container-centered">
                                         <div class="row">
@@ -78,18 +80,19 @@
                                     <h6><b>Mtilda</b></h6>
                                     <p class="m-3">dónde quedamos?</p>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row m-3">
                                 <textarea name="new" id="new" class="form-control"></textarea>
                                 <button class="btn btn-primary mt-3
                                 ">Enviar</button>
+                            </div>
                         </div>
-                </div>
-                </div>
+            </div>
+        </div>
             </div>
             <div id="secondHalf" class="col">
                 
-                <div class="col-12 d-flex">
+               <!--  <div class="col-12 d-flex">
                     <div class="col-4">
                         <img
                         src="/eventFiles/3/cover.jpg"
@@ -108,9 +111,9 @@
 
                     </div>
                 </div>
-
+ -->
     
-                <div class="row mt-3">
+                <!-- <div class="row mt-3">
                     <div class="col-12">
                         <div class="row ml-3">
                             <div class="col-6">
@@ -124,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             </div>
         </div>
