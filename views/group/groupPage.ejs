@@ -3,21 +3,7 @@
 <head>
     <%- include('../partials/head.ejs') %>
 
-    <style>
-        .ana{
-            background-image: url("/userFiles/1/img/profile/profile.jpg");
-        }
-
-        .carlos{
-            background-image: url("/userFiles/3/img/profile/profile.jpg");
-
-        }
-
-        .matilda{
-            background-image: url("/userFiles/4/img/profile/profile.jpg");
-
-        }
-    </style>
+    <script src="/js/group/groupPage.js" defer></script>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -25,7 +11,7 @@
     <%- include('../partials/nav.ejs') %>
 
     <main class="container-fluid mt-3">
-        <p hidden><%= group_id %></p>
+        <p id="groupId" hidden><%= group_id %></p>
 
         <div class="row">
             <div id="firstHalf" class="col-6 ml-3">

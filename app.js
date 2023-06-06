@@ -88,4 +88,4 @@ app.use('/group', groupRoutes);
 
 app.use('/signup', signupRoutes);
 
-app.use('/comment');
+app.use('/comment', commentRoutes);
