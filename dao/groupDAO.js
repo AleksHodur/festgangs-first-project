@@ -145,17 +145,13 @@ const getByParticipant = async (id) => {
 
 const addUser = async (user_id, group_id) => {
 
-    const sql = 'INSERT INTO festgangs.usergroup (user_id, group-id) VALUES (?, ?)';
+    const sql = 'INSERT INTO festgangs.usergroup (user_id, group_id) VALUES (?, ?)';
     const args = [user_id, group_id];
 
     try{
-        const rows = await query(sql, args);
+        await query(sql, args);
 
-        if(rows.length > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return true;
 
     }catch(error){
         console.error(error);

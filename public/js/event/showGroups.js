@@ -45,9 +45,15 @@ $(document).ready( function(){
                         numActualUsers + '</p>');
                     $(col).append(actualUsers);
         
+                    let linkJoin = $('<a></a>');
+                    $(linkJoin).attr('class', 'joinButton');
+                    $(linkJoin).attr('href', '#');
+                    $(linkJoin).val(grupo.id);
+                    $(col).append(linkJoin);
+
                     let joinButton = $('<button></button>');
                     $(joinButton).text('Unirse al grupo');
-                    $(col).append(joinButton);
+                    $(linkJoin).append(joinButton);
                     
                     if(numActualUsers < numMaxUsers){
                         $(joinButton).attr('class', 'btn btn-success');
@@ -57,6 +63,36 @@ $(document).ready( function(){
         
                     $(divGroups).append(newGroup);
                     $(divGroups).append('<hr>');
+
+                    $('.joinButton').click(function(){
+
+                        let group_id = $(this).val();
+                        console.log('group id: join button')
+                        console.log(group_id);
+
+                        $.get('/user/inSession', function(data, status){
+
+                            let user_id = data.id;
+                            
+                            $.post('/group/addUser', {user_id, group_id}, function(data, status){
+
+                                console.log(data.message);
+
+                            }).fail(function(error){
+                                console.log('error front'); //mensaje ventana fallo
+                                console.error(error);
+                            });
+                        });
+
+/*                         $.post('/group/addUser', {group_id}, function(data, status){
+
+                            console.log(data.message);
+                        }).fail(function(error){
+                            console.log('error front');
+                            console.error(error);
+                        }); */
+
+                    });
                 })
                 .fail(function(error){
                     console.log(error);
