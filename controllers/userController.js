@@ -1,4 +1,5 @@
 const userDAO = require('../dao/userDAO');
+const groupDAO = require('../dao/groupDAO');
 
 const user_get_in_session = (request, response) => {
     console.log('Hola desde in session');
@@ -110,12 +111,20 @@ const user_get_id_by_group = async (request, response) => {
 
     try{
         const users = await userDAO.getIdByGroup(groupId);
+        const group = await groupDAO.getById(groupId);
         let sessionUserIsInGroup = false;
 
-        for(let i = 0; i < users.length; i++){
-            if(users[i].user_id == sessionUser.id){
-                sessionUserIsInGroup = true;
+        if(group.leader == sessionUser.id){
+            sessionUserIsInGroup = true;
+        }else{
+
+            for(let i = 0; i < users.length; i++){
+                if(users[i].user_id == sessionUser.id){
+                    sessionUserIsInGroup = true;
+                    i = users.length;
+                }
             }
+
         }
 
         response.status(200).json({users, sessionUserIsInGroup});
