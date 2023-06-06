@@ -106,10 +106,19 @@ const user_get_id_by_group = async (request, response) => {
 
     console.log('En el controlador de get id by group');
     const groupId = request.params.group;
+    const sessionUser = request.session.user;
 
     try{
         const users = await userDAO.getIdByGroup(groupId);
-        response.status(200).json({users});
+        let sessionUserIsInGroup = false;
+
+        for(let i = 0; i < users.length; i++){
+            if(users[i].user_id == sessionUser.id){
+                sessionUserIsInGroup = true;
+            }
+        }
+
+        response.status(200).json({users, sessionUserIsInGroup});
 
     }catch(error){
         console.log(error);

@@ -33,6 +33,7 @@ $(document).ready( function(){
                     console.log(data);
 
                     let users = data.users;
+                    let sessionUserIsInGroup = data.sessionUserIsInGroup;
             
                     let numActualUsers = users.length;
                     let numMaxUsers = grupo.max_users;
@@ -44,21 +45,32 @@ $(document).ready( function(){
                     let actualUsers = $('<p><b>Usuarios actuales: </b>' + 
                         numActualUsers + '</p>');
                     $(col).append(actualUsers);
-        
-                    let linkJoin = $('<a></a>');
-                    $(linkJoin).attr('class', 'joinButton');
-                    $(linkJoin).attr('href', '#');
-                    $(linkJoin).val(grupo.id);
-                    $(col).append(linkJoin);
 
-                    let joinButton = $('<button></button>');
-                    $(joinButton).text('Unirse al grupo');
-                    $(linkJoin).append(joinButton);
-                    
-                    if(numActualUsers < numMaxUsers){
-                        $(joinButton).attr('class', 'btn btn-success');
+                    if(sessionUserIsInGroup){
+
+                        let viewButton = $('<a></a>');
+                        $(viewButton).attr('class', 'btn btn-success');
+                        $(viewButton).attr('href', '#');
+                        $(viewButton).text('Ver grupo');
+                        $(col).append(viewButton);
+
                     }else{
-                        $(joinButton).attr('class', 'btn btn-success disabled');
+        
+                        let linkJoin = $('<a></a>');
+                        $(linkJoin).attr('class', 'joinButton');
+                        $(linkJoin).attr('href', '#');
+                        $(linkJoin).val(grupo.id);
+                        $(col).append(linkJoin);
+
+                        let joinButton = $('<button></button>');
+                        $(joinButton).text('Unirse al grupo');
+                        $(linkJoin).append(joinButton);
+                        
+                        if(numActualUsers < numMaxUsers){
+                            $(joinButton).attr('class', 'btn btn-success');
+                        }else{
+                            $(joinButton).attr('class', 'btn btn-success disabled');
+                        }
                     }
         
                     $(divGroups).append(newGroup);
