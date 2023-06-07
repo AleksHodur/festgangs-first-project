@@ -8,7 +8,7 @@ $(document).ready(async function(){
     });
 
     await getForum(group_id);
-    //await getEvent(group_id);
+    await getEvent(group_id);
 });
 
 async function postNewComment(){
@@ -117,4 +117,59 @@ async function noComments(){
     $(forum).append(message);
     $(message).text('Todavía no hay mensajes en el foro');
     $(message).attr('class', 'text-secondary');
+}
+
+async function getEvent(id){
+
+    $.get('/event/byGroup/' + id, async function(data, status){
+
+        let evento = data.evento;
+
+        if(evento){
+
+            let img = $('eventCover');
+            $(img).attr('src', '/eventFiles/' + evento.id + '/cover.jpg');
+            $(img).attr('alt', evento.title);
+
+            $('#eventTitle').text(evento.title);
+
+            let dateText = await formatDate(evento.date);
+            $('#eventDate').text(dateText);
+
+            $('eventArtist').text(evento.artist);
+            $('eventLocation').text(evento.location + ', ' + evento.city + ', ' + evento.country);
+
+        }else{
+            noEvent();
+        }
+    }).fail(async function(error){
+
+        console.error(error);
+        noEvent();
+    });
+}
+
+async function noEvent(){
+
+    let message = $('<h4></h4>');
+    $(message).attr('class', 'text-danger');
+    $(message).text('Algo ha salido mal :( Inténtalo otra vez más tarde');
+
+    $('#eventDiv').empty();
+    $('#eventDiv').append(message);
+}
+
+async function formatDate(formatDate){
+
+    return getZero(formatDate.getDate()) +
+        '/' + getZero(formatDate.getMonth() + 1) + '/' + formatDate.getFullYear();
+}
+
+async function getZero(fecha){
+
+    if(fecha < 10){
+        return '0' + fecha;
+    }else{
+        return fecha;
+    }
 }
