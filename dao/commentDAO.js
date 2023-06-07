@@ -43,6 +43,28 @@ const getByGroup = async (group_id) => {
     }
 }
 
+const createComment = async (commentData) => {
+
+    const sql = 'INSERT INTO festgangs.groupcomment (user_id, group_id, content) ' +
+        'VALUES (?, ?, ?, ?)';
+    const args = [commentData.user_id, commentData.group_id, commentData.content];
+
+    try{
+        const rows = await query(sql, args);
+        let fields = rows[0];
+
+        const comment = commentModel(fields.id, fields.user_id, fields.group_id,
+            fields.created_at);
+
+        return comment;
+
+    }catch(error){
+        console.error(error);
+        return null;
+    }
+}
+
 module.exports = {
-    getByGroup
+    getByGroup,
+    createComment
 }

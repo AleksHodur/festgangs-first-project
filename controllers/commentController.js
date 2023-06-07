@@ -15,6 +15,29 @@ const comment_get_by_group = async (request, response) => {
     }
 }
 
+const comment_post_new = async (request, response) => {
+
+    let commentData = request.body;
+    const user = request.session.user;
+
+    commentData.user_id = user.id;
+
+    try{
+        const comment = await commentDAO.createComment(commentData);
+
+        if(comment){
+            response.status(200).json({success: true});
+        }else{
+            response.status(500).json({success: false});
+        }
+
+    }catch(error){
+        console.error(error);
+        response.status(500).json({success: false});
+    }
+}
+
 module.exports = {
-    comment_get_by_group
+    comment_get_by_group,
+    comment_post_new
 }

@@ -14,8 +14,14 @@ $(document).ready(async function(){
 async function postNewComment(){
 
     let content = $('#newContent').val();
+    let group_id = $('#groupId').text();
 
-    $.post('/comment', {content}, async function(){
+    const commentData = {
+        content,
+        group_id
+    }
+
+    $.post('/comment', commentData, async function(){
 
         location.reload();
 
