@@ -75,8 +75,6 @@ async function getForum(id){
                 $(photoDiv).css('background-position', 'center');
                 $(photoDiv).css('min-height', '80px');
                 $(photoDiv).css('min-width', '80px');
-                $(photoDiv).css('background-image', 'url(/userFiles/' + comment.user_id +
-                    '/img/profile/profile.jpg)');
                 $(photoInRow).append(photoDiv);
 
                 let contentCol = $('<div></div>');
@@ -97,6 +95,14 @@ async function getForum(id){
                     let user = data.user;
 
                     $(contentTitle).text(user.name);
+
+                    if(user.profilePhoto){
+                        $(photoDiv).css('background-image', 'url(/userFiles/' + user.id +
+                            '/img/profile/profile.jpg)');
+
+                    }else{
+                        $(photoDiv).css('background-image', 'url(/userFiles/default/img/profile/profile.jpg)');
+                    }
                 });
 
             });
@@ -187,8 +193,13 @@ async function getLead(user_id){
         $(profile).css('background-position', 'center');
         $(profile).css('min-height', '80px');
         $(profile).css('min-width', '80px');
-        $(profile).css('background-image', 'url(/userFiles/' + leader.id +
-            '/img/profile/profile.jpg)');
+
+        if(leader.profilePhoto){
+            $(profile).css('background-image', 'url(/userFiles/' + leader.id +
+                '/img/profile/profile.jpg)');
+        }else{
+            $(profile).css('background-image', 'url(/userFiles/default/img/profile/profile.jpg)');
+        }
 
         $('#leaderName').html('<b>' + leader.name + '</b>');
 
@@ -231,8 +242,13 @@ async function getParticipants(id){
             $(photoDiv).css('background-position', 'center');
             $(photoDiv).css('min-height', '80px');
             $(photoDiv).css('min-width', '80px');
-            $(photoDiv).css('background-image', 'url(/userFiles/' + user.id +
-                '/img/profile/profile.jpg)');
+
+            if(user.profilePhoto){
+                $(photoDiv).css('background-image', 'url(/userFiles/' + user.id +
+                    '/img/profile/profile.jpg)');
+            }else{
+                $(photoDiv).css('background-image', 'url(/userFiles/default/img/profile/profile.jpg)');
+            }
 
 
             let nameCol = $('<div></div>');
