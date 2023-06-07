@@ -1,6 +1,7 @@
 $(document).ready(async function(){
 
     let group_id = $('#groupId').text();
+    let leader_id = $('#leaderId').text();
 
     $('#postNewComment').click(async function (){
 
@@ -9,7 +10,7 @@ $(document).ready(async function(){
 
     await getForum(group_id);
     await getEvent(group_id);
-    await getMembers(group_id);
+    await getMembers(group_id, leader_id);
 });
 
 async function postNewComment(){
@@ -169,24 +170,15 @@ function getZero(fecha){
     }
 }
 
-async function getMembers(id){
+async function getMembers(group_id, leader_id){
 
-    let exito1 = await getLead(id);
-    let exito2 = await getParticipants(id);
-
-    if(!exito1 || !exito2){
-        let message = $('<h4></h4>');
-        $(message).attr('class', 'text-danger');
-        $(message).text('Algo ha salido mal :( Inténtalo otra vez más tarde');
-
-        $('#membersDiv').empty();
-        $('#membersDiv').append(message);
-    }
+    await getLead(leader_id);
+    await getParticipants(group_id);
 }
 
-async function getLead(id){
+async function getLead(user_id){
 
-    $.get('/user/:id', async function(data, status){
+    $.get('/user/' + user_id, async function(data, status){
 
         const leader = data.user;
 
@@ -195,12 +187,20 @@ async function getLead(id){
         $(profile).css('background-position', 'center');
         $(profile).css('min-height', '80px');
         $(profile).css('min-width', '80px');
-        $(profile).css('background-image', 'url(/userFiles/' + user.id +
+        $(profile).css('background-image', 'url(/userFiles/' + leader.id +
             '/img/profile/profile.jpg)');
 
+        $('#leaderName').html('<b>' + leader.name + '</b>');
+
+    }).fail(function(error){
+        console.log(error);
     });
 }
 
 async function getParticipants(id){
-    return false;
+    
+    $.get('/user/byGroup/' + id, async function(data, status){
+
+        
+    });
 }

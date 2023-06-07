@@ -12,6 +12,7 @@
 
     <main class="container-fluid mt-3">
         <p id="groupId" hidden><%= group_id %></p>
+        <p id="leaderId" hidden><%= leader.id %></p>
 
         <div class="row">
             <div id="firstHalf" class="col-6 ml-3">
@@ -89,24 +90,29 @@
 
                 <h3 class="mt-3">Miembros</h3>
 
-                <div id="membersDiv" class="container-fluid mt-3">
+                <div id="membersDiv" class="container-fluid mt-3 ml-5">
 
                     <div class="container-fluid" id="leader">
                         <h4 class="text-info"><b>Lead</b></h4>
 
-                        <div class="row bg-light" id="leaderInfo">
-                            <div class="col">
+                        <div class="row bg-light p-2" id="leaderInfo">
+                            <div class="col-3">
                                 <div class="container-fluid container-centered">
                                     <div class="row">
                                         <div id="leadProfilePic" class="rounded-circle"></div>
                                     </div>
                                 </div>
                             </div>
-                            <h6 id="leaderName"></h6>
+                            <div class="col d-flex align-items-center">
+                                <h5 id="leaderName"></h5>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row" id="participants"></div>
+                    <div class="container-fluid mt-3" id="participants">
+                        <h4 class="text-info"><b>Participantes</b></h4>
+
+                    </div>
                 </div>
                 
             </div>
