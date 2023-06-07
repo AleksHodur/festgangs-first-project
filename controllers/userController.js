@@ -143,10 +143,11 @@ const user_get_by_group = async (request, response) => {
         const userIds = await userDAO.getIdByGroup(group_id);
         let users = [];
         
-        userIds.forEach(async (id) => {
-            let user = await userDAO.getById();
+        for(let i = 0; i < userIds.length; i++){
+            let id = userIds[i].user_id;
+            let user = await userDAO.getById(id);
             users.push(user);
-        });
+        }
 
         if(users && users.length > 0){
             response.status(200).json({users});

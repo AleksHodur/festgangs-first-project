@@ -194,6 +194,7 @@ async function getLead(user_id){
 
     }).fail(function(error){
         console.log(error);
+        $('#leaderName').text('Algo ha salido mal :( Inténtalo otra vez más tarde');
     });
 }
 
@@ -202,7 +203,7 @@ async function getParticipants(id){
     $.get('/user/byGroup/' + id, async function(data, status){
 
         let users = data.users;
-        let mainDiv = $('#participantDiv');
+        let mainDiv = $('#participantsDiv');
 
         users.forEach(async (user) => {
             
@@ -223,8 +224,8 @@ async function getParticipants(id){
             $(photoContainer).append(photoRow);
 
             let photoDiv = $('<div></div>');
-            $('photoDiv').attr('class', 'rounded-circle');
-            $(photoContainer).append(photoDiv);
+            $(photoDiv).attr('class', 'rounded-circle');
+            $(photoRow).append(photoDiv);
 
             $(photoDiv).css('background-size', 'cover');
             $(photoDiv).css('background-position', 'center');
@@ -236,11 +237,20 @@ async function getParticipants(id){
 
             let nameCol = $('<div></div>');
             $(nameCol).attr('class', 'col d-flex align-items-center');
-            $(mainDiv).append(nameCol);
+            $(userInfo).append(nameCol);
 
             let userName = $('<h5></h5>');
             $(userName).html('<b>' + user.name + '</b>');
+            $(nameCol).append(userName);
 
+        }).fail(function(error){
+            console.log(error);
+
+            let message = $('<h4></h4>');
+            $(message).text('Algo ha salido mal :( Inténtalo otra vez');
+            $(message).attr('class', 'text-danger');
+
+            $('#participantsDiv').append(message);
         });
     });
 }
