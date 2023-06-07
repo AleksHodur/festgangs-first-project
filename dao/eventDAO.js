@@ -68,7 +68,6 @@ const getById = async (id) => {
     }
 }
 
-
 module.exports = {
     getAllEvents,
     getById
