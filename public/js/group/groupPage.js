@@ -201,6 +201,46 @@ async function getParticipants(id){
     
     $.get('/user/byGroup/' + id, async function(data, status){
 
-        
+        let users = data.users;
+        let mainDiv = $('#participantDiv');
+
+        users.forEach(async (user) => {
+            
+            let userInfo = $('<div></div>');
+            $(userInfo).attr('class', 'row bg-light p-2');
+            $(mainDiv).append(userInfo);
+
+            let photoCol = $('<div></div>');
+            $(photoCol).attr('class', 'col-3');
+            $(userInfo).append(photoCol);
+
+            let photoContainer = $('<div></div>');
+            $(photoContainer).attr('class', 'container-fluid container-centered');
+            $(photoCol).append(photoContainer);
+
+            let photoRow = $('<div></div>');
+            $(photoRow).attr('class', 'row');
+            $(photoContainer).append(photoRow);
+
+            let photoDiv = $('<div></div>');
+            $('photoDiv').attr('class', 'rounded-circle');
+            $(photoContainer).append(photoDiv);
+
+            $(photoDiv).css('background-size', 'cover');
+            $(photoDiv).css('background-position', 'center');
+            $(photoDiv).css('min-height', '80px');
+            $(photoDiv).css('min-width', '80px');
+            $(photoDiv).css('background-image', 'url(/userFiles/' + user.id +
+                '/img/profile/profile.jpg)');
+
+
+            let nameCol = $('<div></div>');
+            $(nameCol).attr('class', 'col d-flex align-items-center');
+            $(mainDiv).append(nameCol);
+
+            let userName = $('<h5></h5>');
+            $(userName).html('<b>' + user.name + '</b>');
+
+        });
     });
 }

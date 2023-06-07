@@ -135,6 +135,31 @@ const user_get_id_by_group = async (request, response) => {
     }
 }
 
+const user_get_by_group = async (request, response) => {
+
+    const group_id = request.params.group_id;
+
+    try{
+        const userIds = await userDAO.getIdByGroup(group_id);
+        let users = [];
+        
+        userIds.forEach(async (id) => {
+            let user = await userDAO.getById();
+            users.push(user);
+        });
+
+        if(users && users.length > 0){
+            response.status(200).json({users});
+        }else{
+            response.status(500).json({found: false});
+        }
+
+    }catch(error){
+        console.error(error);
+        response.status(500).json({found: false});
+    }
+}
+
 module.exports = {
     user_get_in_session,
     user_show_profile,
@@ -142,5 +167,6 @@ module.exports = {
     user_by_name,
     user_by_email,
     user_update,
-    user_get_id_by_group
+    user_get_id_by_group,
+    user_get_by_group
 };
