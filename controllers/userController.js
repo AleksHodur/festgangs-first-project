@@ -9,7 +9,11 @@ const user_get_in_session = (request, response) => {
 }
 
 const user_show_profile = (request, response) => {
-    response.render('profile', {title: 'Perfil'});
+    if(request.session.user){
+        response.render('profile', {title: 'Perfil'});
+    }else{
+        response.redirect('/');
+    }
 }
 
 const user_by_id = async (request, response) => {

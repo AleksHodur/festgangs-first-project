@@ -7,7 +7,7 @@ router.post('/', groupController.group_new);
 
 router.post('/addUser', groupController.group_add_user);
 
-router.get('/new/:id', groupController.group_new_form);
+//router.get('/new/:id', groupController.group_new_form);
 
 router.get('/byEvent/:id', groupController.groups_by_event);
 

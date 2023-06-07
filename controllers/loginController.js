@@ -14,7 +14,13 @@ const userDAO = require('../dao/userDAO');
   console.log('Connected to db! :)');
 }); */
 
-const login_index = (request, response) => {response.render('login', {title: 'Login'});};
+const login_index = (request, response) => {
+  if(request.session.user){
+    response.redirect('/');
+  }else{
+    response.render('login', {title: 'Login'});
+  }
+};
 
 const login_close = (request, response) => {
     request.session.destroy();

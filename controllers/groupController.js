@@ -35,7 +35,7 @@ const group_new = async (request, response) => {
     }
 }
 
-const group_new_form = async (request, response) => {
+/* const group_new_form = async (request, response) => {
 
     let evento = await eventDAO.getById(request.params.id);
     console.log('evento desde new form controller');
@@ -46,7 +46,7 @@ const group_new_form = async (request, response) => {
     }else{
         response.render('error/500', {title: 'Error 500'});
     }
-}
+} */
 
 const groups_by_event = async (request, response) => {
 
@@ -61,15 +61,11 @@ const groups_by_event = async (request, response) => {
 
 const group_show_my = (request, response) => {
 
-/*    const user = request.session.user;
-     const leadGroups = await groupDAO.getByLeader(user.id);
-    const participantGroups = await groupDAO.getByParticipant(user.id); */
-
-    //if(user && leadGroups && participantGroups){
+    if(request.session.user){
         response.status(200).render('group/myGroups', {title: 'Mis grupos'/* , leadGroups, participantGroups */});
-/*     }else{
-        response.status(500).render('error/500', {title: 'Error 500'});
-    } */
+    }else{
+        response.redirect('/');
+    }
 }
 
 const group_json_my = async (request, response) => {
@@ -90,12 +86,18 @@ const group_json_my = async (request, response) => {
 }
 
 const group_by_id = async (request, response) => {
-    const group_id = request.params.id;
 
-    const group = await groupDAO.getById(group_id);
-    const leader = await userDAO.getById(group.leader);
+    if(request.session.user){
+        const group_id = request.params.id;
 
-    response.status(200).render('group/groupPage', {title: 'Grupo de ' + leader.name, group_id, leader});
+        const group = await groupDAO.getById(group_id);
+        const leader = await userDAO.getById(group.leader);
+
+        response.status(200).render('group/groupPage', {title: 'Grupo de ' + leader.name, group_id, leader});
+        
+    }else{
+        response.redirect('/');
+    }
 }
 
 const group_add_user = async (request, response) => {
@@ -112,7 +114,7 @@ const group_add_user = async (request, response) => {
 
 module.exports = {
     group_new,
-    group_new_form,
+    //group_new_form,
     groups_by_event,
     group_show_my,
     group_json_my,

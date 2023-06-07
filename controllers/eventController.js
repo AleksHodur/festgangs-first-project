@@ -8,14 +8,19 @@ const event_get_all = async (request, response) => {
 
 const event_get_by_id = async (request, response) => {
 
-    let evento = await eventDAO.getById(request.params.id);
-    console.log('evento desde get by id controller');
-    console.log(evento);
+    if(request.session.user){
+        let evento = await eventDAO.getById(request.params.id);
+        console.log('evento desde get by id controller');
+        console.log(evento);
 
-    if(evento){
-        response.render('event/event', {title: 'Crear grupo', evento: evento});
+        if(evento){
+            response.render('event/event', {title: 'Crear grupo', evento: evento});
+        }else{
+            response.render('error/500', {title: 'Error 500'});
+        }
+
     }else{
-        response.render('error/500', {title: 'Error 500'});
+        response.redirect('/');
     }
 }
 

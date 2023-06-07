@@ -1,6 +1,12 @@
 const userDAO = require('../dao/userDAO');
 
-const signup_index = (request, response) => {response.render('signup', {title: 'Signup'})};
+const signup_index = (request, response) => {
+    if(request.session.user){
+        response.redirect('/');
+    }else{
+        response.render('signup', {title: 'Signup'})
+    }
+};
 
 const signup_new_user = async (request, response) => {
 
