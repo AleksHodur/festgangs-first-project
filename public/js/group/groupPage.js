@@ -8,19 +8,20 @@ $(document).ready(async function(){
 
 async function getForum(id){
 
-    let forum = $('#forum');
+    //let forum = $('#forum');
+    let newCommentDiv = $('#newComment');
 
     $.get('/comment/byGroup/' + id, async function(data, status){
 
         const comments = data.comments;
 
-        if(comments){
+        if(comments.length > 0){
 
             comments.forEach(async (comment) => {
 
                 let photoRow = $('<div></div>');
                 $(photoRow).attr('class', 'row mb-3 mx-3');
-                $(forum).append(photoRow);
+                $(newCommentDiv).before(photoRow);
 
                 let photoCol = $('<div></div>');
                 $(photoCol).attr('class', 'col-3');
@@ -46,7 +47,7 @@ async function getForum(id){
 
                 let contentCol = $('<div></div>');
                 $(contentCol).attr('class', 'col bg-light');
-                $(forum).append(contentCol);
+                $(newCommentDiv).before(contentCol);
 
                 let contentTitle = $('<h6></h6>');
                 $(contentTitle).css('font-weight', 'bold');
@@ -73,9 +74,10 @@ async function getForum(id){
 
 async function noComments(){
 
-    let forum = $('#forum');
+    let newCommentDiv = $('#newComment');
     let message = $('<h4></h4>');
 
-    $(forum).append(message);
-    $(message).text('De momento, no hay mensajes en el foro. Ánimate :)');
+    $(newCommentDiv).before(message);
+    $(message).text('Todavía no hay mensajes en el foro');
+    $(message).attr('class', 'text-secondary');
 }
