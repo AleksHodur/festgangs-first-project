@@ -23,6 +23,7 @@ async function postNewComment(){
 
     $.post('/comment', commentData, async function(){
 
+        $('#newContent').val('');
         location.reload();
 
     }).fail(function(error){
@@ -38,7 +39,8 @@ async function postNewComment(){
 async function getForum(id){
 
     //let forum = $('#forum');
-    let newCommentDiv = $('#newComment');
+    //let newCommentDiv = $('#newComment');
+    let forum = $('#forumMessages');
 
     $.get('/comment/byGroup/' + id, async function(data, status){
 
@@ -48,13 +50,16 @@ async function getForum(id){
 
             comments.forEach(async (comment) => {
 
-                let photoRow = $('<div></div>');
-                $(photoRow).attr('class', 'row mb-3 mx-3');
-                $(newCommentDiv).before(photoRow);
+                console.log('esto es el comentario');
+                console.log(comment);
+
+                let commentRow = $('<div></div>');
+                $(commentRow).attr('class', 'row mb-3 mx-3');
+                $(forum).append(commentRow);
 
                 let photoCol = $('<div></div>');
                 $(photoCol).attr('class', 'col-3');
-                $(photoRow).append(photoCol);
+                $(commentRow).append(photoCol);
 
                 let photoContainer = $('<div></div>');
                 $(photoContainer).attr('class', 'container-fluid container-centered');
@@ -70,13 +75,14 @@ async function getForum(id){
                 $(photoDiv).css('background-position', 'center');
                 $(photoDiv).css('min-height', '80px');
                 $(photoDiv).css('min-width', '80px');
-                $(photoDiv).text('&nbsp;');
+                //$(photoDiv).text('&nbsp;');
                 $(photoDiv).css('background-image', 'url(/userFiles/' + comment.user_id +
                     '/img/profile/profile.jpg)');
+                $(photoInRow).append(photoDiv);
 
                 let contentCol = $('<div></div>');
                 $(contentCol).attr('class', 'col bg-light');
-                $(newCommentDiv).before(contentCol);
+                $(commentRow).append(contentCol);
 
                 let contentTitle = $('<h6></h6>');
                 $(contentTitle).css('font-weight', 'bold');
@@ -85,6 +91,7 @@ async function getForum(id){
                 let contentParagraph = $('<p></p>');
                 $(contentParagraph).attr('class', 'm-3');
                 $(contentParagraph).text(comment.content);//!!!
+                $(contentCol).append(contentParagraph);
 
                 $.get('/user/' + comment.user_id, async function(data, status){
 
@@ -103,10 +110,11 @@ async function getForum(id){
 
 async function noComments(){
 
-    let newCommentDiv = $('#newComment');
+    //let newCommentDiv = $('#newComment');
+    let forum = $('#forumMessages');
     let message = $('<h4></h4>');
 
-    $(newCommentDiv).before(message);
+    $(forum).append(message);
     $(message).text('Todavía no hay mensajes en el foro');
     $(message).attr('class', 'text-secondary');
 }

@@ -32,7 +32,7 @@ const getByGroup = async (group_id) => {
 
         rows.forEach(row => {
             comments.push(commentModel(row.id, row.user_id, row.group_id,
-                row.created_at));
+                row.created_at, row.content));
         });
 
         return comments;
@@ -46,15 +46,19 @@ const getByGroup = async (group_id) => {
 const createComment = async (commentData) => {
 
     const sql = 'INSERT INTO festgangs.groupcomment (user_id, group_id, content) ' +
-        'VALUES (?, ?, ?, ?)';
+        'VALUES (?, ?, ?)';
     const args = [commentData.user_id, commentData.group_id, commentData.content];
 
+    const sql2 = 'SELECT * FROM festgangs.eventgroup ORDER BY id DESC LIMIT 1';
+
     try{
-        const rows = await query(sql, args);
-        let fields = rows[0];
+        await query(sql, args);
+
+        const rows = await query(sql2);
+        const fields = rows[0];
 
         const comment = commentModel(fields.id, fields.user_id, fields.group_id,
-            fields.created_at);
+            fields.created_at, fields.content);
 
         return comment;
 
