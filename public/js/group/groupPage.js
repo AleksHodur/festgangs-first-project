@@ -9,6 +9,7 @@ $(document).ready(async function(){
 
     await getForum(group_id);
     await getEvent(group_id);
+    await getMembers(group_id);
 });
 
 async function postNewComment(){
@@ -38,8 +39,6 @@ async function postNewComment(){
 
 async function getForum(id){
 
-    //let forum = $('#forum');
-    //let newCommentDiv = $('#newComment');
     let forum = $('#forumMessages');
 
     $.get('/comment/byGroup/' + id, async function(data, status){
@@ -75,7 +74,6 @@ async function getForum(id){
                 $(photoDiv).css('background-position', 'center');
                 $(photoDiv).css('min-height', '80px');
                 $(photoDiv).css('min-width', '80px');
-                //$(photoDiv).text('&nbsp;');
                 $(photoDiv).css('background-image', 'url(/userFiles/' + comment.user_id +
                     '/img/profile/profile.jpg)');
                 $(photoInRow).append(photoDiv);
@@ -90,7 +88,7 @@ async function getForum(id){
 
                 let contentParagraph = $('<p></p>');
                 $(contentParagraph).attr('class', 'm-3');
-                $(contentParagraph).text(comment.content);//!!!
+                $(contentParagraph).text(comment.content);
                 $(contentCol).append(contentParagraph);
 
                 $.get('/user/' + comment.user_id, async function(data, status){
@@ -161,12 +159,6 @@ async function noEvent(){
     $('#eventDiv').empty();
     $('#eventDiv').append(message);
 }
-/* 
-async function formatDate(formatDate){
-
-    return getZero(formatDate.getDate()) +
-        '/' + getZero(formatDate.getMonth() + 1) + '/' + formatDate.getFullYear();
-} */
 
 function getZero(fecha){
 
@@ -175,4 +167,40 @@ function getZero(fecha){
     }else{
         return fecha;
     }
+}
+
+async function getMembers(id){
+
+    let exito1 = await getLead(id);
+    let exito2 = await getParticipants(id);
+
+    if(!exito1 || !exito2){
+        let message = $('<h4></h4>');
+        $(message).attr('class', 'text-danger');
+        $(message).text('Algo ha salido mal :( Inténtalo otra vez más tarde');
+
+        $('#membersDiv').empty();
+        $('#membersDiv').append(message);
+    }
+}
+
+async function getLead(id){
+
+    $.get('/user/:id', async function(data, status){
+
+        const leader = data.user;
+
+        let profile = $('#leadProfilePic');
+        $(profile).css('background-size', 'cover');
+        $(profile).css('background-position', 'center');
+        $(profile).css('min-height', '80px');
+        $(profile).css('min-width', '80px');
+        $(profile).css('background-image', 'url(/userFiles/' + user.id +
+            '/img/profile/profile.jpg)');
+
+    });
+}
+
+async function getParticipants(id){
+    return false;
 }
