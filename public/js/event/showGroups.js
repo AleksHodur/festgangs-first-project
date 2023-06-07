@@ -82,6 +82,18 @@ $(document).ready( function(){
                             $.post('/group/addUser', {user_id, group_id}, function(data, status){
 
                                 console.log(data.message);
+                                $(newGroup).empty();
+                                
+                                let newMessage = $('<h3></h3>');
+                                $(newMessage).text('¡Ya formas parte del grupo!');
+                                $(newMessage).attr('class', 'text-success');
+                                $(newGroup).append(newMessage);
+                                
+                                let welcomeButton = $('<a></a>');
+                                $(welcomeButton).attr('class', 'btn btn-success ml-3');
+                                $(welcomeButton).attr('href', '/group/' + grupo.id);
+                                $(welcomeButton).text('Ver grupo');
+                                $(newGroup).append(welcomeButton);
 
                             }).fail(function(error){
                                 console.log('error front'); //mensaje ventana fallo

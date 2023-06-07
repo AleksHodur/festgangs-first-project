@@ -101,7 +101,7 @@ async function getForum(id){
                             '/img/profile/profile.jpg)');
 
                     }else{
-                        $(photoDiv).css('background-image', 'url(/userFiles/default/img/profile/profile.jpg)');
+                        $(photoDiv).css('background-image', 'url(/userFiles/default/img/profile/profile.png)');
                     }
                 });
 
@@ -198,7 +198,7 @@ async function getLead(user_id){
             $(profile).css('background-image', 'url(/userFiles/' + leader.id +
                 '/img/profile/profile.jpg)');
         }else{
-            $(profile).css('background-image', 'url(/userFiles/default/img/profile/profile.jpg)');
+            $(profile).css('background-image', 'url(/userFiles/default/img/profile/profile.png)');
         }
 
         $('#leaderName').html('<b>' + leader.name + '</b>');
@@ -247,7 +247,7 @@ async function getParticipants(id){
                 $(photoDiv).css('background-image', 'url(/userFiles/' + user.id +
                     '/img/profile/profile.jpg)');
             }else{
-                $(photoDiv).css('background-image', 'url(/userFiles/default/img/profile/profile.jpg)');
+                $(photoDiv).css('background-image', 'url(/userFiles/default/img/profile/profile.png)');
             }
 
 
