@@ -2,9 +2,32 @@ $(document).ready(async function(){
 
     let group_id = $('#groupId').text();
 
+    $('#postNewComment').click(async function (){
+
+        await postNewComment();
+    });
+
     await getForum(group_id);
     //await getEvent(group_id);
 });
+
+async function postNewComment(){
+
+    let content = $('#newContent').val();
+
+    $.post('/comment', {content}, async function(){
+
+        location.reload();
+
+    }).fail(function(error){
+
+        console.error(error);
+        let message = $('<p></p>');
+        $(message).attr('class', 'text-danger ml-3 mt-3');
+        $(message).text('Ha ocurrido un error :( Prueba otra vez más tarde');
+        $('#postNewComment').after(message);
+    });
+}
 
 async function getForum(id){
 
