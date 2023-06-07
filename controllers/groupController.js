@@ -15,7 +15,7 @@ const group_new = async (request, response) => {
                 group = await groupDAO.newGroup(event_id, leader, max_users);
 
                 if(group){
-                    response.status(201).json({message: 'Grupo creado con éxito', success: true});
+                    response.status(201).json({message: 'Grupo creado con éxito', success: true, group});
                 }else{
                     response.status(200).json({message: 'No se ha podido crear el grupo :(', success: false});
                 }

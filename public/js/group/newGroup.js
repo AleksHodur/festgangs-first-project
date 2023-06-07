@@ -20,7 +20,7 @@ $(document).ready(function(){
 function submitForm(user){
 
     let groupData = {
-        event_id: $('#eventId').val(), //IMPORTANTE BUG
+        event_id: $('#eventId').val(),
         leader: user.id,
         max_users: $('#maxUsers').val()
     };
@@ -36,7 +36,7 @@ function submitForm(user){
 
 
             if(data.success){
-                newSuccess(user);
+                newSuccess(data.group);
             }else{
                 $('#message').text(data.message);
             }
@@ -53,13 +53,18 @@ function submitForm(user){
 
 }
 
-function newSuccess(user){
+function newSuccess(grupo){
 
     $('#newForm').empty();
 
     let info = $('<h3></h3>');
     $(info).attr('class', 'text-success');
-    $(info).text('Grupo de ' + user.name + ' creado con éxito');
+    $(info).text('¡Has creado un grupo para este evento!');
 
-    $('#newForm').append(info);
+    let welcomeButton = $('<a></a>');
+    $(welcomeButton).attr('class', 'btn btn-success ml-3');
+    $(welcomeButton).attr('href', '/group/' + grupo.id);
+    $(welcomeButton).text('Ver grupo');
+
+    $('#newForm').append(info, welcomeButton);
 }
