@@ -48,7 +48,7 @@ $(document).ready( function(){
 
                         let viewButton = $('<a></a>');
                         $(viewButton).attr('class', 'btn btn-success');
-                        $(viewButton).attr('href', '#');
+                        $(viewButton).attr('href', '/group/' + grupo.id);
                         $(viewButton).text('Ver grupo');
                         $(col).append(viewButton);
 
