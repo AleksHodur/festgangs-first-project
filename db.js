@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-//const userModel = require('./models/userModel');
 
 const conexionBD = mysql.createConnection({
     host: 'localhost',
@@ -93,10 +92,10 @@ conexionBD.query(crearTablaUser, (err, result) => {
 });
 
 const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password, profile_photo) VALUES' +
-                    "(1, 'ana@gmail.com', 'Ana29', '1234', 0)," +
+                    "(1, 'ana@gmail.com', 'Ana29', '1234', 1)," +
                     "(1, 'juan@gmail.com', 'juan_guay', '1234', 0)," +
                     "(1, 'carlos@gmail.com', 'charless', '1234', 1)," +
-                    "(1, 'matilda@gmail.com', 'Mtilda', '1234', 0)";
+                    "(1, 'matilda@gmail.com', 'Mtilda', '1234', 1)";
 
 console.log(llenarTablaUser);
 
@@ -160,9 +159,10 @@ conexionBD.query(crearTablaUserGroup, (err, result) => {
 
 const crearTablaGroupComment = 'CREATE TABLE festgangs.groupcomment (' +
                     'id INT AUTO_INCREMENT PRIMARY KEY, ' +
-                    'user_id INT, ' +
-                    'group_id INT, ' +
+                    'user_id INT NOT NULL, ' +
+                    'group_id INT NOT NULL, ' +
                     'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, ' +
+                    'content VARCHAR(500) NOT NULL, ' +
                     'FOREIGN KEY (user_id) REFERENCES user(id), ' +
                     'FOREIGN KEY (group_id) REFERENCES eventgroup(id)' +
                     ');';
@@ -171,20 +171,3 @@ conexionBD.query(crearTablaGroupComment, (err, result) => {
     if (err) throw err;
     console.log('Tabla groupcomment creada con éxito');
 });
-/* let userId = 2;
-/*
-conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, result, fields) => {
-    if (err) throw err;
-    console.log(result);
-    console.log(fields);
-}); 
-
-conexionBD.query('SELECT * FROM festgangs.user WHERE id = ?;', [userId], (err, result, fields) => {
-    if (err) throw err;
-/*     console.log(result);
-    console.log(result[0].id);
-    console.log(result);
-    let field = result[0];
-    let user = userModel(field.id, field.email, field.name, field.password);
-    console.log(user.saludo());
-}); */
