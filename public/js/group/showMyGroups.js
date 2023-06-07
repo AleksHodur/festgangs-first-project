@@ -19,6 +19,8 @@ $(document).ready( async function(){
 async function getLeadGroups(leadGroups){
     let leadDiv = $('#leadGroups');
 
+    if(leadGroups.length > 0){
+
         leadGroups.forEach(async (group) => {
 
             let newGroup = $('<div></div>');
@@ -49,10 +51,19 @@ async function getLeadGroups(leadGroups){
                 });
             });
         });
+
+    }else{
+        let message = $('<h4></h4>');
+        $(message).text('No se han encontrado grupos');
+        $(message).attr('class', 'text-secondary');
+        $(leadDiv).append(message);
+    }
 }
 
 async function getParGroups(parGroups){
     let parDiv = $('#participantGroups');
+
+    if(parGroups.length > 0){
 
         parGroups.forEach(async (group) => {
 
@@ -83,4 +94,11 @@ async function getParGroups(parGroups){
                 });
             });
         });
+
+    }else{
+        let message = $('<h4></h4>');
+        $(message).text('No se han encontrado grupos');
+        $(message).attr('class', 'text-secondary');
+        $(parDiv).append(message);
+    }
 }

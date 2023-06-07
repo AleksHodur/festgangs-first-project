@@ -10,7 +10,7 @@ async function getForum(id){
 
     let forum = $('#forum');
 
-    $.get('/byGroup/' + id, async function(data, status){
+    $.get('/comment/byGroup/' + id, async function(data, status){
 
         const comments = data.comments;
 
