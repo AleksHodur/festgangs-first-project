@@ -127,17 +127,20 @@ async function getEvent(id){
 
         if(evento){
 
-            let img = $('eventCover');
+            let img = $('#eventCover');
             $(img).attr('src', '/eventFiles/' + evento.id + '/cover.jpg');
+            $(img).attr('class', 'img-fluid img-thumbnail');
             $(img).attr('alt', evento.title);
 
             $('#eventTitle').text(evento.title);
 
-            let dateText = await formatDate(evento.date);
+            let formatDate = new Date(evento.date);
+            let dateText = getZero(formatDate.getDate()) +
+                '/' + getZero(formatDate.getMonth() + 1) + '/' + formatDate.getFullYear();
             $('#eventDate').text(dateText);
 
-            $('eventArtist').text(evento.artist);
-            $('eventLocation').text(evento.location + ', ' + evento.city + ', ' + evento.country);
+            $('#eventArtist').text(evento.artist);
+            $('#eventLocation').text(evento.location + ', ' + evento.city + ', ' + evento.country);
 
         }else{
             noEvent();
@@ -158,14 +161,14 @@ async function noEvent(){
     $('#eventDiv').empty();
     $('#eventDiv').append(message);
 }
-
+/* 
 async function formatDate(formatDate){
 
     return getZero(formatDate.getDate()) +
         '/' + getZero(formatDate.getMonth() + 1) + '/' + formatDate.getFullYear();
-}
+} */
 
-async function getZero(fecha){
+function getZero(fecha){
 
     if(fecha < 10){
         return '0' + fecha;
