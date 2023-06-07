@@ -15,8 +15,6 @@ $(document).ready( function(){
             $(newGroup).append(col);
 
             let title = $('<h1></h1>');
-            //let titleText = getTitle(grupo.leader);
-            //$(title).text(titleText);
             $(col).append(title);
 
             $.get('/user/' + grupo.leader, function(data, status){
@@ -55,22 +53,16 @@ $(document).ready( function(){
                         $(col).append(viewButton);
 
                     }else{
-        
-/*                         let linkJoin = $('<a></a>');
-                        $(linkJoin).attr('class', 'joinButton');
-                        $(linkJoin).attr('href', '#');
-                        $(linkJoin).val(grupo.id);
-                        $(col).append(linkJoin); */
 
                         let joinButton = $('<button></button>');
                         $(joinButton).text('Unirse al grupo');
-                        //$(linkJoin).append(joinButton);
                         $(joinButton).attr('class', 'btn btn-success joinButton');
                         $(joinButton).val(grupo.id);
                         $(col).append(joinButton);
                         
                         if(numActualUsers >= numMaxUsers){
                             $(joinButton).attr('disabled', true);
+                            $(joinButton).attr('title', 'El grupo está lleno');
                         }
                     }
         
@@ -97,14 +89,6 @@ $(document).ready( function(){
                             });
                         });
 
-/*                         $.post('/group/addUser', {group_id}, function(data, status){
-
-                            console.log(data.message);
-                        }).fail(function(error){
-                            console.log('error front');
-                            console.error(error);
-                        }); */
-
                     });
                 })
                 .fail(function(error){
@@ -114,29 +98,6 @@ $(document).ready( function(){
             .fail(function(error){
                 console.log(error);
             });
-
-/*             let numMaxUsers = grupo.max_users;
-            let numActualUsers = getActualUsers(grupo.id);
-
-            let maxUsers =$('<p><b>Límite de usuarios: </b>' +
-                numMaxUsers + '</p>');
-            $(newGroup).append(maxUsers);
-
-            let actualUsers = $('<p><b>Usuarios actuales: </b>' + 
-                numActualUsers + '</p>');
-            $(newGroup).append(actualUsers);
-
-            let joinButton = $('<button></button>');
-            $(joinButton).text('Unirse al grupo');
-            $(newGroup).append(joinButton);
-            
-            if(numActualUsers < numMaxUsers){
-                $(joinButton).attr('class', 'btn btn-success');
-            }else{
-                $(joinButton).attr('class', 'btn btn-success disabled');
-            }
-
-            $(divGroups).append(newGroup); */
 
         });
     });
