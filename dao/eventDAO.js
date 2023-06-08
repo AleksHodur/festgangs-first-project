@@ -72,7 +72,7 @@ const update = async (eventData) => {
 
   const fieldsName = await getFieldsName();
 
-  if(fieldsName > 0){
+  if(fieldsName){
 
     let sql = 'UPDATE festgangs.event SET ';
     const args = [];

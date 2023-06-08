@@ -125,6 +125,19 @@ async function showUpdateWindow(id){
     let updateForm = new bootstrap.Modal(document.getElementById('updateModal'));
     updateForm.show();
 
+    $.get('/event/json/' + id, async function(data, status){
+
+        const evento = data.evento;
+
+        $('#titleForm').val(evento.title);
+        $('#artistForm').text(evento.artist);
+        $('#cityForm').val(evento.city);
+        $('#countryForm').val(evento.country);
+        $('#locationForm').text(evento.location);
+        $('#dateForm').val(evento.date);
+
+    });
+
     $('#updateButton').click(async function(){
 
         const eventData = {
