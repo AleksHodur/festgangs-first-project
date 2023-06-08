@@ -76,6 +76,20 @@ $(document).ready(function(){
             $(divEvents).append(newEvent);
             $(divEvents).append('<hr>');
 
+            let crudCol = $('<div></div>');
+            $(crudCol).attr('class', 'col mt-3');
+            $(newEvent).append(crudCol);
+
+            let updateButton = $('<button></button>');
+            $(updateButton).attr('class', 'btn btn-success');
+            $(updateButton).text('Editar');
+            $(crudCol).append(updateButton);
+
+            let deleteButton = $('<button></button>');
+            $(deleteButton).attr('class', 'btn btn-danger ml-3');
+            $(deleteButton).text('Eliminar');
+            $(crudCol).append(deleteButton);
+
         });
     })
     .fail(function(){
