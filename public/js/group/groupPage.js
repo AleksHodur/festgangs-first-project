@@ -207,6 +207,8 @@ async function getLead(user_id){
 
         $('#leaderName').html('<b>' + leader.name + '</b>');
 
+        $('#leaderLink').attr('href', '/user/profile/' + leader.id);
+
     }).fail(function(error){
         console.log(error);
         $('#leaderName').text('Algo ha salido mal :( Inténtalo otra vez más tarde');
@@ -221,10 +223,14 @@ async function getParticipants(id){
         let mainDiv = $('#participantsDiv');
 
         users.forEach(async (user) => {
+
+            let userLink = $('<a></a>');
+            $(userLink).attr('href', '/user/profile/' + user.id);
+            $(mainDiv).append(userLink);
             
             let userInfo = $('<div></div>');
             $(userInfo).attr('class', 'row bg-light p-2');
-            $(mainDiv).append(userInfo);
+            $(userLink).append(userInfo);
 
             let photoCol = $('<div></div>');
             $(photoCol).attr('class', 'col-3');
