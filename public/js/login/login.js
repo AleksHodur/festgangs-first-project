@@ -1,22 +1,6 @@
 const botonInicio = $('#inicioSesion');
 
 $(document).ready(function(){
-/*
-    $.ajax({
-        url: '/prueba',
-        type: 'GET',
-        contentType: 'application/json',
-        data: JSON.stringify(datosUsuario),
-
-        success: function(data, status){
-            console.log(data.message);
-            alert('enhorabuena');
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error:', textStatus, errorThrown);
-            console.log('jqXR:', jqXHR);
-          }
-    }); */
 
     $(botonInicio).click(function(){
 
@@ -47,22 +31,6 @@ $(document).ready(function(){
         }else{
             $('#message').text('Introduce un correo electrónico válido');
         }
-
-/*          $.ajax({
-            url: '/login',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(datosUsuario),
-
-            success: function(data, status){
-                console.log(data);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Error:', textStatus, errorThrown);
-                console.log('jqXR:', jqXHR);
-              }
-        }); 
- */
 
         return false;
 
