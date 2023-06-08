@@ -17,10 +17,19 @@ function changeViewOption(){
 
     let optionLink = $('<a></a>');
     $(optionLink).text('Cambiar vista');
-    $(optionLink).attr('href', '/admin/events');
     $(optionLink).attr('class', 'dropdown-item');
+    $(optionLink).attr('id', 'optionLink');
 
     $(optionLi).append(optionLink);
+
+    let adminPath = /admin/;
+    let currentPath = window.location.pathname;
+
+    if(adminPath.test(currentPath)){
+        $(optionLink).attr('href', '/');
+    }else{
+        $(optionLink).attr('href', '/admin/events');
+    }
 }
 
 function showViewType(){
