@@ -103,6 +103,13 @@ async function showEvents(){
                 await showUpdateWindow(id);
             });
 
+            $('.deleteWindow').click(async function(){
+
+                let id = $(this).val();
+        
+                await showDeleteWindow(id);
+            });
+
         });
     })
     .fail(function(){
@@ -154,6 +161,23 @@ async function showUpdateWindow(id){
     });
 }
 
+async function showDeleteWindow(id){
+    let deleteForm = new bootstrap.Modal(document.getElementById('deleteModal'));
+    deleteForm.show();
+
+    $.get('/event/json/' + id, async function(data, status){
+
+        const evento = data.evento;
+        $('#eventTitleDelete').text(evento.title);
+
+    });
+
+    $('#deleteButton').click(async function(){
+
+        await deleteEvent(id);
+    });
+}
+
 async function updateEvent(eventData){
 
     $.ajax({
@@ -170,6 +194,25 @@ async function updateEvent(eventData){
 
             $('#updateMessage').text(data.message);
             $('#updateMessage').attr('class', 'text-danger mt-2');
+        }
+    });
+}
+
+async function deleteEvent(id){
+
+    $.ajax({
+        url: '/admin/event/' + id,
+        type: 'DELETE',
+        
+        success: function(data, status){
+            console.log('deleted successfully');
+            location.reload();
+        },
+        error: function(error){
+            console.error(error);
+
+            $('#deleteMessage').text('Ha ocurrido un error. Prueba otra vez más tarde');
+            $('#deleteMessage').attr('class', 'text-danger mt-2');
         }
     });
 }
