@@ -24,7 +24,26 @@ const admin_edit_event = async (request, response) => {
     }
 }
 
+const admin_delete_event = async (request, response) => {
+
+    if(request.session.user && request.session.user.type == 2){
+
+        const id = request.params.id;
+
+        try{
+            let success = await eventDAO.deleteEvent(id);
+            response.status(200).json({success});
+
+        }catch(error){
+            console.error(error);
+            response.status(500).json({success});
+        }
+
+    }
+}
+
 module.exports = {
     admin_view_events,
-    admin_edit_event
+    admin_edit_event,
+    admin_delete_event
 }

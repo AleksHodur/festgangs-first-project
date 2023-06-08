@@ -135,8 +135,17 @@ async function queryUpdate(sql, args){
   }
 }
 
+const deleteEvent = async (id) => {
+
+  const sql = 'DELETE FROM festgangs.event WHERE id = ?';
+  const args = [id];
+
+  await query(sql, args);
+}
+
 module.exports = {
     getAllEvents,
     getById,
-    update
+    update,
+    deleteEvent
 };

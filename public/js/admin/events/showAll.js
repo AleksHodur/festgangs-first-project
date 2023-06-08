@@ -185,11 +185,11 @@ async function updateEvent(eventData){
         type: 'PUT',
         data: eventData,
         
-        success: function(data, status){
+        success: async function(data, status){
             console.log('updated successfully');
             location.reload();
         },
-        error: function(error){
+        error: async function(error){
             console.error(error);
 
             $('#updateMessage').text(data.message);
@@ -204,11 +204,11 @@ async function deleteEvent(id){
         url: '/admin/event/' + id,
         type: 'DELETE',
         
-        success: function(data, status){
+        success: async function(data, status){
             console.log('deleted successfully');
             location.reload();
         },
-        error: function(error){
+        error: async function(error){
             console.error(error);
 
             $('#deleteMessage').text('Ha ocurrido un error. Prueba otra vez más tarde');
