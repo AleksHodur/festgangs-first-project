@@ -63,7 +63,6 @@ conexionBD.query(crearTablaUserType, (err, result) => {
 
 const llenarTablaUserType = 'INSERT INTO festgangs.usertype (name, description) VALUES ' +
                             "('standard', 'Poderes: crear perfil personal, organizar/partcipar en grupos/eventos, buscar información sobre estos'), " +
-                            "('moderator', 'Poderes: borrar mensajes, borrar fotos, banear usuarios'), " +
                             "('administrator', 'Poderes: editar eventos, gestionar usuarios')";
 
 conexionBD.query(llenarTablaUserType, (err, result) => {
@@ -95,7 +94,8 @@ const llenarTablaUser = 'INSERT INTO festgangs.user (type, email, name, password
                     "(1, 'ana@gmail.com', 'Ana29', '1234', 1)," +
                     "(1, 'juan@gmail.com', 'juan_guay', '1234', 0)," +
                     "(1, 'carlos@gmail.com', 'charless', '1234', 1)," +
-                    "(1, 'matilda@gmail.com', 'Mtilda', '1234', 1)";
+                    "(1, 'matilda@gmail.com', 'Mtilda', '1234', 1)," +
+                    "(2, 'admin@gmail.com', 'Admin', '1234', 0)";
 
 console.log(llenarTablaUser);
 
@@ -120,7 +120,7 @@ conexionBD.query(crearTablaEvent, (err, result) => {
 });
 
 const llenarTablaEvent = 'INSERT INTO festgangs.event (title, artist, city, country, location, date) VALUES' +
-                            "('Hombres G', 'Hombres G', 'Gijón', 'España', 'Palacio de Deportes Presidente Adolfo Suárez', '2023-06-03')," +
+                            "('Hombres G', 'Hombres G', 'Gijón', 'España', 'Palacio de Deportes Presidente Adolfo Suárez', '2023-06-09')," +
                             "('Skinyz', 'Skinyz', 'Gijón', 'España', 'Billy Bob', '2023-06-10')," +
                             "('Riverland 2023', 'Sticky M.A., Yung Beef, C.R.O, Delaossa, Cruz Cafuné, Kidd Keo', 'Arriondas', 'España', 'Valle de la Música', '2023-08-24')," +
                             "('Tsunami Xixón', 'Wolfmother, Dropkick Murphys, Descendents, Me First And TheGimme Gimmes, The Hellacopters, Toundra, Desakato', 'Gijón', 'España', 'Laboral Ciudad de la Cultura', '2023-07-27');";

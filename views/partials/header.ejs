@@ -1,6 +1,6 @@
 <header class="container-fluid bg-white">
 
-<!--     <link rel="stylesheet" href="/css/header.css"> -->
+    <script src="/js/admin/adminHeader.js" defer></script>
 
     <div id="headerRow" class="row justify-content-between mt-3">
         <div id="title" class="col-2 ml-5">
@@ -26,7 +26,7 @@
         </div>
         <div class="col-2 pl-4">
 
-            <div class="dropdown pr-2 d-flex">
+            <div id="userMenu" class="dropdown pr-2 d-flex">
                 <div class="rounded-circle profilePhoto"
                 style="background-size: cover; background-position: center;
                 min-height: 80px; min-width: 80px;" data-bs-toggle="dropdown">&nbsp;</div>
@@ -41,7 +41,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownHeader">
                 <li><a href="/user/profile" class="dropdown-item">Ver perfil</a></li>
                 <li><a href="/group/myGroups" class="dropdown-item">Mis grupos</a></li>
-                <hr class="dropdown-divider">
+                <hr id="beforeChangeView" class="dropdown-divider">
                 <li><a href="/login/close" class="dropdown-item text-danger">Cerrar sesión</a></li>
             </ul>
             </div>
