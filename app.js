@@ -8,6 +8,7 @@ const userRoutes = require('./routes/userRoutes');
 const groupRoutes = require('./routes/groupRoutes');
 const signupRoutes = require('./routes/signupRoutes');
 const commentRoutes = require('./routes/commentRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 //express app
 const app = express();
@@ -89,3 +90,5 @@ app.use('/group', groupRoutes);
 app.use('/signup', signupRoutes);
 
 app.use('/comment', commentRoutes);
+
+app.use('/admin', adminRoutes);

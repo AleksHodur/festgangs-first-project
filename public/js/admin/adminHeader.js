@@ -17,7 +17,7 @@ function changeViewOption(){
 
     let optionLink = $('<a></a>');
     $(optionLink).text('Cambiar vista');
-    $(optionLink).attr('href', '#');
+    $(optionLink).attr('href', '/admin/events');
     $(optionLink).attr('class', 'dropdown-item');
 
     $(optionLi).append(optionLink);
