@@ -1,24 +1,13 @@
-//const mysql = require('mysql'); //driver de mysql
-
-//const userModel = require('../models/userModel'); //carga el modelo usuario
 const userDAO = require('../dao/userDAO');
-//conexión base de datos
-/* const conexionBD = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root'
-}); */
-
-/* conexionBD.connect((err) => {
-  if(err) throw err;
-  console.log('Connected to db! :)');
-}); */
 
 const login_index = (request, response) => {
   if(request.session.user){
     response.redirect('/');
   }else{
-    response.render('login', {title: 'Login'});
+    let token = Math.floor(Math.random() * 9999) + 1000;
+    request.session.token = token;
+
+    response.render('login', {title: 'Login', token});
   }
 };
 
@@ -29,22 +18,29 @@ const login_close = (request, response) => {
 
 const login_check = async (request, response) => {
     
-    const { email, password } = request.body;
+    const { email, password, token } = request.body;
 
-    try{
-      console.log(userDAO);
-      const user = await userDAO.getUserByEmailAndPassword(email, password);
+    if(token == request.session.token){
 
-      if(user){
-        console.log(user);
-        request.session.user = user;
-        response.status(200).json({found: true, message: 'Usuario correcto!'});
-      }else{
-        response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
+      try{
+        console.log(userDAO);
+        const user = await userDAO.getUserByEmailAndPassword(email, password);
+
+        if(user){
+          console.log(user);
+          request.session.user = user;
+          response.status(200).json({found: true, message: 'Usuario correcto!'});
+        }else{
+          response.status(200).json({found: false, message: 'El usuario o la contraseña son incorrectos'});
+        }
+
+      }catch(error){
+        console.error(error);
+        response.status(500).json({error: 'Internal server error'});
       }
 
-    }catch(error){
-      console.error(error);
+    }else{
+      console.log('No coincide el token');
       response.status(500).json({error: 'Internal server error'});
     }
       

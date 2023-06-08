@@ -133,8 +133,11 @@ const createUser = async (username, email, password) => {
     'VALUES (?, ?, ?)';
   const args = [email, username, password];
 
+  const sql2 = 'SELECT * FROM festgangs.user ORDER BY id DESC LIMIT 1';
+
   try{
-    const rows = await query(sql, args);
+    await query(sql, args);
+    const rows = await query(sql2);
     const fields = rows[0];
 
     return userModel(fields.id, fields.type, fields.email, fields.name,

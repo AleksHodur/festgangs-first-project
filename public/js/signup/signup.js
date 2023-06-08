@@ -5,7 +5,8 @@ $(document).ready(function(){
         let datosUsuario = {
             username: $('#username').val(),
             email: $('#email').val(),
-            password: $('#pass').val()
+            password: $('#pass').val(),
+            token: $('#token').val()
         };
 
         if(validarCorreo(datosUsuario.email)){
@@ -32,6 +33,7 @@ $(document).ready(function(){
                                         if(data != null){
                                             console.log('success');
                                             console.log(data);
+                                            window.location.replace("/");
                                         }
 
                                     }).fail(function(){

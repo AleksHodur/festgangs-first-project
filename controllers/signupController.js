@@ -4,25 +4,33 @@ const signup_index = (request, response) => {
     if(request.session.user){
         response.redirect('/');
     }else{
-        response.render('signup', {title: 'Signup'})
+        let token = Math.floor(Math.random() * 9999) + 1000;
+        request.session.token = token;
+
+        response.render('signup', {title: 'Signup', token})
     }
 };
 
 const signup_new_user = async (request, response) => {
 
-    const {name, email, password} = request.body;
+    const {username, email, password, token} = request.body;
 
-    try{
-        const user = await userDAO.createUser(name, email, password);
-        if(user){
-            request.session.user = user;
-            response.redirect('/');
-        }else{
+    if(token == request.session.token){
+        try{
+            const user = await userDAO.createUser(username, email, password);
+            if(user){
+                request.session.user = user;
+                response.redirect('/');
+            }else{
+                response.status(200).json({found: false, message: 'No se ha podido crear el usuario. Inténtalo más tarde'});
+            }
+
+        }catch(error){
+            console.error(error);
             response.status(200).json({found: false, message: 'No se ha podido crear el usuario. Inténtalo más tarde'});
         }
-
-    }catch(error){
-        console.error(error);
+    }else{
+        console.log('No coincide el token');
         response.status(200).json({found: false, message: 'No se ha podido crear el usuario. Inténtalo más tarde'});
     }
 };
