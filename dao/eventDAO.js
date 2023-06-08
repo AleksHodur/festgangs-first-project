@@ -68,7 +68,75 @@ const getById = async (id) => {
     }
 }
 
+const update = async (eventData) => {
+
+  const fieldsName = await getFieldsName();
+
+  if(fieldsName > 0){
+
+    let sql = 'UPDATE festgangs.event SET ';
+    const args = [];
+    let firstTime = true;
+
+    for(let i = 0; i < fieldsName.length; i++){
+      let field = fieldsName[i].Field;
+
+      if(eventData[field]){
+
+        if(firstTime){
+          firstTime = false;
+          sql += field + ' = ?';
+        }else{
+          sql += ', ' + field + ' = ?';
+        }
+
+        args.push(eventData[field]);
+      }
+    }
+
+    sql += ' WHERE id = ?';
+    args.push(eventData.id);
+
+    return await queryUpdate(sql, args);
+  }else{
+    return null;
+  }
+}
+
+async function getFieldsName(){
+
+  const sql = 'DESCRIBE festgangs.event';
+
+  try{
+    const rows = await query(sql);
+    console.log('Fields name: ');
+    console.log(rows);
+    return rows;
+
+  }catch(error){
+    console.log('Error fields name');
+    console.error(error);
+    return null;
+
+  }
+}
+
+async function queryUpdate(sql, args){
+
+  try{
+    const rows = await query(sql, args);
+    console.log(rows);
+    return rows[0];
+
+  }catch(error){
+    console.log('Error en queryUpdate');
+    console.error(error);
+    return null;
+  }
+}
+
 module.exports = {
     getAllEvents,
-    getById
+    getById,
+    update
 };
