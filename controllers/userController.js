@@ -16,6 +16,18 @@ const user_show_profile = (request, response) => {
     }
 }
 
+const user_show_other_profile = async (request, response) => {
+
+    if(request.session.user){
+        const userId = request.params.id;
+        const user = await userDAO.getById(userId);
+        
+        response.render('user/otherProfile', {title: 'Perfil', user});
+    }else{
+        response.redirect('/');
+    }
+}
+
 const user_by_id = async (request, response) => {
 
     const id = request.params.id;
@@ -168,6 +180,7 @@ const user_get_by_group = async (request, response) => {
 module.exports = {
     user_get_in_session,
     user_show_profile,
+    user_show_other_profile,
     user_by_id,
     user_by_name,
     user_by_email,

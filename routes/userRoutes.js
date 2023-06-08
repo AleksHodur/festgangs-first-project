@@ -7,6 +7,8 @@ router.get('/inSession', userController.user_get_in_session);
 
 router.get('/profile', userController.user_show_profile)
 
+router.get('/profile/:id', userController.user_show_other_profile)
+
 router.get('/exists/name/:username', userController.user_by_name);
 
 router.get('/exists/email/:email', userController.user_by_email);

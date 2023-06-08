@@ -69,13 +69,17 @@ async function getForum(id){
                 $(photoInRow).attr('class', 'row');
                 $(photoContainer).append(photoInRow);
 
+                let photoLink = $('<a></a>');
+                $(photoLink).attr('href', '/user/profile/' + comment.user_id);
+                $(photoInRow).append(photoLink);
+
                 let photoDiv = $('<div></div>');
                 $(photoDiv).attr('class', 'rounded-circle');
                 $(photoDiv).css('background-size', 'cover');
                 $(photoDiv).css('background-position', 'center');
                 $(photoDiv).css('min-height', '80px');
                 $(photoDiv).css('min-width', '80px');
-                $(photoInRow).append(photoDiv);
+                $(photoLink).append(photoDiv);
 
                 let contentCol = $('<div></div>');
                 $(contentCol).attr('class', 'col bg-light');
