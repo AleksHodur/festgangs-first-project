@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/css/home.css">
 <!--     <script src="/js/event/showAll.js" defer></script> -->
     <script src="/js/admin/events/showAll.js"></script>
+    <script src="/js/admin/events/crud.js"></script>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -20,6 +21,50 @@
     <main class="container-fluid mt-3">
 
             <div id="events" class="col">
+            </div>
+
+            <div class="modal fade" id="updateModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar evento <span id="eventTitle"></span></h5>
+                            <button type="button" class="close" data-bs-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+        
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="titleForm">Título</label>
+                                    <input type="text" name="titleForm" id="titleForm" class="form-control" maxlength="50"></input>
+                                    <hr>
+                                    <label for="artistForm">Artista(s)</label>
+                                    <textarea name="artistForm" id="artistForm" class="form-control" maxlength="500"></textarea>
+                                    <hr>
+                                    <label for="cityForm">Ciudad</label>
+                                    <input type="text" name="cityForm" id="cityForm" class="form-control" maxlength="50"></input>
+                                    <hr>
+                                    <label for="countryForm">País</label>
+                                    <input type="text" name="countryForm" id="countryForm" class="form-control" maxlength="50"></input>
+                                    <hr>
+                                    <label for="locationForm">Ubicación</label>
+                                    <textarea type="text" name="locationForm" id="locationForm" class="form-control" maxlength="50"></textarea>
+                                    <hr>
+                                    <label for="dateForm">Date</label>
+                                    <input type="date" name="dateForm" id="dateForm" class="form-control"></input>
+
+                                    <p id="updateMessage"></p>
+        
+                                </div>
+                            </form>
+                        </div>
+    
+                        <div class="modal-footer justify-content-start">
+                            <button id="updateButton" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

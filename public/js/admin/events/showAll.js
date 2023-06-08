@@ -1,6 +1,10 @@
-$(document).ready(function(){
+$(document).ready(async function(){
 
-    $.get('/event', function(data, status){
+    await showEvents();
+});
+
+async function showEvents(){
+    $.get('/event', async function(data, status){
         let divEvents = $('#events');
         let events = data;
 
@@ -81,14 +85,23 @@ $(document).ready(function(){
             $(newEvent).append(crudCol);
 
             let updateButton = $('<button></button>');
-            $(updateButton).attr('class', 'btn btn-success');
+            $(updateButton).attr('class', 'btn btn-success updateWindow');
+            $(updateButton).val(evento.id);
             $(updateButton).text('Editar');
             $(crudCol).append(updateButton);
 
             let deleteButton = $('<button></button>');
-            $(deleteButton).attr('class', 'btn btn-danger ml-3');
+            $(deleteButton).attr('class', 'btn btn-danger ml-3 deleteWindow');
+            $(deleteButton).val(evento.id);
             $(deleteButton).text('Eliminar');
             $(crudCol).append(deleteButton);
+
+            $('.updateWindow').click(async function(){
+
+                let id = $(this).val();
+        
+                await showUpdateWindow(id);
+            });
 
         });
     })
@@ -97,7 +110,7 @@ $(document).ready(function(){
         $(error).text('No se han encontrado eventos :(');
         $(divEvents).append(error);
     });
-});
+}
 
 function getZero(fecha){
 
@@ -106,4 +119,44 @@ function getZero(fecha){
     }else{
         return fecha;
     }
+}
+
+async function showUpdateWindow(id){
+    let updateForm = new bootstrap.Modal(document.getElementById('updateModal'));
+    updateForm.show();
+
+    $('#updateButton').click(async function(){
+
+        const eventData = {
+            id: id,
+            title: $('#titleForm').val(),
+            artist: $('#artistForm').val(),
+            city: $('#cityForm').val(),
+            country: $('#countryForm').val(),
+            location: $('#locationForm').val(),
+            date: $('#dateForm').val()
+        }
+
+        await updateEvent(eventData);
+    });
+}
+
+async function updateEvent(eventData){
+
+    $.ajax({
+        url: '/admin/event',
+        type: 'PUT',
+        data: eventData,
+        
+        success: function(data, status){
+            console.log('updated successfully');
+            location.reload();
+        },
+        error: function(error){
+            console.error(error);
+
+            $('#updateMessage').text(data.message);
+            $('#updateMessage').attr('class', 'text-danger mt-2');
+        }
+    });
 }
