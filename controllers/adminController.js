@@ -32,11 +32,11 @@ const admin_delete_event = async (request, response) => {
 
         try{
             let success = await eventDAO.deleteEvent(id);
-            response.status(200).json({success});
+            response.status(200).json({success: true});
 
         }catch(error){
             console.error(error);
-            response.status(500).json({success});
+            response.status(500).json({success: false});
         }
 
     }
