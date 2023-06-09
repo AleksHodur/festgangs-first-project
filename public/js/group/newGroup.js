@@ -17,6 +17,9 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * Enviado formulario de grupo nuevo
+ */
 function submitForm(user){
 
     let groupData = {
@@ -28,7 +31,7 @@ function submitForm(user){
     console.log('groupData');
     console.log(groupData);
 
-    if(groupData.max_users >= 2 && groupData.max_users <= 10){
+    if(groupData.max_users >= 2 && groupData.max_users <= 50){
 
         $.post('/group/', groupData, function(data, status){
 
@@ -53,6 +56,9 @@ function submitForm(user){
 
 }
 
+/**
+ * Mensaje de éxito y botón para ver el grupo nuevo
+ */
 function newSuccess(grupo){
 
     $('#newForm').empty();

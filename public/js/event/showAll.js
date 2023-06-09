@@ -73,19 +73,19 @@ $(document).ready(function(){
             $(date).attr('class', 'ml-3')
             $(datosEvento).append(date);
 
+            //Sacando los grupos que tiene el evento
             $.get('/group/byEvent/' + evento.id, function(data, status){
                 console.log('from getgroups event.js front-end');
                 console.log(data);
 
                 let groups = data;
-                //let infoGroups = getInfoGroups(groups, evento.id);
 
                 let infoGroups = $('<div></div>');
                 $(infoGroups).attr('class', 'col mt-3');
                 let messageGroups = $('<p></p>');
                 $(infoGroups).append(messageGroups);
             
-            
+                
                 if(groups == null || groups.length < 1){
                     $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
                 }else{
@@ -100,6 +100,7 @@ $(document).ready(function(){
             
                 }
             
+                //Botón de crear grupo
                 let newGroup = $('<a></a>');
                 $(newGroup).attr('class', 'btn btn-primary');
                 $(newGroup).attr('href', '/event/' + evento.id);
@@ -116,22 +117,6 @@ $(document).ready(function(){
                 console.log(error);
             });
 
-
-/*             let infoGroups = $('<div></div>');
-            $(infoGroups).attr('class', 'col mt-3');
-            let messageGroups = $('<p></p>');
-            $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
-            let newGroup = $('<a></a>');
-            $(newGroup).attr('class', 'btn btn-primary');
-            $(newGroup).attr('href', '/group/new/' + evento.id);
-            $(newGroup).text('Crear grupo');
-            $(infoGroups).append(messageGroups, newGroup); 
-
-            $(newEvent).append(infoGroups);
-
-            $(divEvents).append(newEvent);
-            $(divEvents).append('<hr>'); */
-
         });
     })
     .fail(function(){
@@ -141,6 +126,9 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * Añade un cero delante si la cifra es menor de diez
+ */
 function getZero(fecha){
 
     if(fecha < 10){
@@ -148,48 +136,4 @@ function getZero(fecha){
     }else{
         return fecha;
     }
-}
-
-async function getGroups(id){
-
-    $.get('/group/byEvent/' + id, function(data, status){
-        console.log('from getgroups event.js front-end');
-        console.log(data);
-        return data;
-    })
-    .fail(function(error){
-        return null;
-    });
-
-}
-
-async function getInfoGroups(groups, id){
-
-    let infoGroups = $('<div></div>');
-    $(infoGroups).attr('class', 'col mt-3');
-    let messageGroups = $('<p></p>');
-    $(infoGroups).append(messageGroups);
-
-
-    if(groups == null || groups.length < 1){
-        $(messageGroups).text('Este evento aún no tiene ningún grupo creado');
-    }else{
-        $(messageGroups).text('Este evento tiene ' + groups.length + ' grupo(s) activo(s)');
-        
-        let checkGroups = $('<a></a>');
-        $(checkGroups).attr('class', 'btn btn-success');
-        $(checkGroups).attr('href', '#');
-        $(checkGroups).text('Ver grupos');
-
-        $(infoGroups).append(checkGroups);
-
-    }
-
-    let newGroup = $('<a></a>');
-    $(newGroup).attr('class', 'btn btn-primary');
-    $(newGroup).attr('href', '/group/new/' + id);
-    $(newGroup).text('Crear grupo');
-    $(infoGroups).append(newGroup);
-
-    return $(infoGroups).html();
 }

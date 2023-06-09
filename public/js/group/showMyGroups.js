@@ -16,6 +16,9 @@ $(document).ready( async function(){
     });
 });
 
+/**
+ * Mostrando los grupos en los que el usuario en sesión es lead
+ */
 async function getLeadGroups(leadGroups){
     let leadDiv = $('#leadGroups');
 
@@ -60,6 +63,9 @@ async function getLeadGroups(leadGroups){
     }
 }
 
+/**
+ * Mostrando grupos en los que el usuario en sesión es participantes
+ */
 async function getParGroups(parGroups){
     let parDiv = $('#participantGroups');
 

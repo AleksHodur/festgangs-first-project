@@ -80,16 +80,29 @@ async function showEvents(){
             $(divEvents).append(newEvent);
             $(divEvents).append('<hr>');
 
+            /**
+             * Columna que contendrá las opciones crud
+             */
             let crudCol = $('<div></div>');
             $(crudCol).attr('class', 'col mt-3');
             $(newEvent).append(crudCol);
 
+            /**
+             * Botón de actualizar
+             * A este se le añade la clase updateWindow y un value
+             * con el id del evento
+             */
             let updateButton = $('<button></button>');
             $(updateButton).attr('class', 'btn btn-success updateWindow');
             $(updateButton).val(evento.id);
             $(updateButton).text('Editar');
             $(crudCol).append(updateButton);
 
+            /**
+             * Botón de borrar
+             * A este se le añade la clase deleteWindow y un value
+             * con el id del evento
+             */
             let deleteButton = $('<button></button>');
             $(deleteButton).attr('class', 'btn btn-danger ml-3 deleteWindow');
             $(deleteButton).val(evento.id);
@@ -119,6 +132,9 @@ async function showEvents(){
     });
 }
 
+/**
+ * Añade un cero delante si la cifra es menor de diez
+ */
 function getZero(fecha){
 
     if(fecha < 10){
@@ -128,6 +144,9 @@ function getZero(fecha){
     }
 }
 
+/**
+ * Para mostrar la ventana de actualización con los campos del evento seleccionado
+ */
 async function showUpdateWindow(id){
     let updateForm = new bootstrap.Modal(document.getElementById('updateModal'));
     updateForm.show();
@@ -161,6 +180,9 @@ async function showUpdateWindow(id){
     });
 }
 
+/**
+ * Para mostrar la ventana de eliminar con el id del evento seleccionado
+ */
 async function showDeleteWindow(id){
     let deleteForm = new bootstrap.Modal(document.getElementById('deleteModal'));
     deleteForm.show();
@@ -178,6 +200,9 @@ async function showDeleteWindow(id){
     });
 }
 
+/**
+ * Para Actualizar el evento
+ */
 async function updateEvent(eventData){
 
     $.ajax({
@@ -198,6 +223,9 @@ async function updateEvent(eventData){
     });
 }
 
+/**
+ * Para borrar el evento
+ */
 async function deleteEvent(id){
 
     $.ajax({

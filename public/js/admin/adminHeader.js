@@ -4,7 +4,7 @@ $(document).ready(function(){
 
         let user = data;
 
-        if(user.type == 2){
+        if(user.type == 2){//si el usuario es admin
             changeViewOption();
             showViewType();
         }
@@ -12,6 +12,9 @@ $(document).ready(function(){
 });
 
 function changeViewOption(){
+    /** Colocar la opción de cambiar vista antes del último elemento
+     * del dropdown
+     */
     let optionLi = $('<li></li>');
     $('#beforeChangeView').before(optionLi);
 
@@ -25,6 +28,11 @@ function changeViewOption(){
     let adminPath = /admin/;
     let currentPath = window.location.pathname;
 
+    /**
+     * Si el path contiene admin, estamos en la vista de administrador
+     * y al pulsar queremos cambiar a la de usuario. De lo contrario,
+     * cambiamos a la de administrador
+     */
     if(adminPath.test(currentPath)){
         $(optionLink).attr('href', '/');
     }else{
@@ -32,6 +40,9 @@ function changeViewOption(){
     }
 }
 
+/**
+ * Función para mostar un mensaje con el tipo de vista
+ */
 function showViewType(){
 
     let currentPath = window.location.pathname;

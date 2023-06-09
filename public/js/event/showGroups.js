@@ -7,16 +7,20 @@ $(document).ready( function(){
         let groups = data;
 
         groups.forEach( grupo => {
+            //contenedor del grupo
             let newGroup = $('<div></div>');
             $(newGroup).attr('class', 'row');
 
+            //columna del grupo
             let col = $('<div></div>');
             $(col).attr('class', 'col');
             $(newGroup).append(col);
 
+            //título
             let title = $('<h1></h1>');
             $(col).append(title);
 
+            //obteniendo el nombre del usuario lead
             $.get('/user/' + grupo.leader, function(data, status){
                 console.log('en title get');
                 console.log(data);
@@ -26,6 +30,7 @@ $(document).ready( function(){
                 let titleText = 'Grupo de ' + user.name;
                 $(title).text(titleText);
 
+                //obteniendo el número de participantes
                 $.get('/user/inGroup/' + grupo.id, function(data, status){
                     console.log('en users get');
                     console.log(data);
@@ -44,6 +49,13 @@ $(document).ready( function(){
                         numActualUsers + '</p>');
                     $(col).append(actualUsers);
 
+                    /**
+                     * Mostrando botones según el usuario en sesión este o no en
+                     * el grupo, o si el grupo está lleno
+                     * Si el usuario está, se muestra el botón Ver grupo
+                     * Si no, se muestra el botón Unirse al grupo, que se 
+                     * encuentra deshabilitado si el grupo está lleno
+                     */
                     if(sessionUserIsInGroup){
 
                         let viewButton = $('<a></a>');
@@ -69,16 +81,19 @@ $(document).ready( function(){
                     $(divGroups).append(newGroup);
                     $(divGroups).append('<hr>');
 
+                    /**Fucionalidad del botón de Unirse */
                     $('.joinButton').click(function(){
 
                         let group_id = $(this).val();
                         console.log('group id: join button')
                         console.log(group_id);
 
+                        //Obteniendo al usuario en sesión
                         $.get('/user/inSession', function(data, status){
 
                             let user_id = data.id;
                             
+                            //Añadiendo el usuario al grupo
                             $.post('/group/addUser', {user_id, group_id}, function(data, status){
 
                                 console.log(data.message);
@@ -114,35 +129,3 @@ $(document).ready( function(){
         });
     });
 });
-
-async function getTitle(userId){
-
-    console.log('en title');
-
-    $.get('/user/' + userId, function(data, status){
-        console.log('en title get');
-        let text = 'Grupo de ' + data.name;
-        return text;
-    })
-    .fail(function(error){
-        console.log(error);
-        return 'Algo ha salido mal :(';
-    });
-
-}
-
-async function getActualUsers(groupId){
-
-    console.log('en users');
-
-    $.get('/inGroup/' + groupId, function(data, status){
-        console.log('en users get');
-
-        let numUsers = data.length;
-        return numUsers;
-    })
-    .fail(function(error){
-        console.log(error);
-        return 0;
-    });
-}

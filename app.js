@@ -2,6 +2,7 @@ const express = require('express'); //framework express
 const { render } = require('ejs'); //framework ejs para incrustar código de servidor en html
 const session = require('express-session'); //módulo de sesiones de express
 
+/** Routers */
 const loginRoutes = require('./routes/loginRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -30,6 +31,7 @@ app.use(express.json()); // This line is to parse JSON request bodies
 //para parsear url request en objetos
 app.use(express.urlencoded({extended: true}));
 
+//imprimiendo la petición en consola
 app.use(function (req, res, next) {
     console.log('Request received: ', req.url);
     next();
@@ -52,15 +54,6 @@ app.use(session({
   saveUninitialized: true
 }))
 
-//Comprobación de sesión. No funciona: bucle infinito
-/* app.use(function(request, response, next){
-  if(request.session.user == null){
-    return response.redirect('/login');
-  }else{
-    next();
-  }
-}); */
-
 app.get('/', (request, response) => {
     if(request.session.user){
       response.render('home', {title: 'Inicio', user: request.session.user});
@@ -69,15 +62,7 @@ app.get('/', (request, response) => {
     }
 });
 
-/* app.get('/prueba', (request, response) => {
-    response.status(200).json({ message: 'Success!' });
-    console.log('éxito');
-    //response.send('Success!');
-}); */
-
-app.put('/prueba', (request, response) => {
-  response.status(200).json({ message: 'Success!' });
-});
+//Utilizando los distintos Routers
 
 app.use('/login', loginRoutes);
 

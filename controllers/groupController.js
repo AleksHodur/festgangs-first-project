@@ -35,19 +35,6 @@ const group_new = async (request, response) => {
     }
 }
 
-/* const group_new_form = async (request, response) => {
-
-    let evento = await eventDAO.getById(request.params.id);
-    console.log('evento desde new form controller');
-    console.log(evento);
-
-    if(evento){
-        response.render('group/groupForm', {title: 'Crear grupo', evento: evento});
-    }else{
-        response.render('error/500', {title: 'Error 500'});
-    }
-} */
-
 const groups_by_event = async (request, response) => {
 
     let groups = await groupDAO.getByEvent(request.params.id);
@@ -62,7 +49,7 @@ const groups_by_event = async (request, response) => {
 const group_show_my = (request, response) => {
 
     if(request.session.user){
-        response.status(200).render('group/myGroups', {title: 'Mis grupos'/* , leadGroups, participantGroups */});
+        response.status(200).render('group/myGroups', {title: 'Mis grupos'});
     }else{
         response.redirect('/');
     }
@@ -114,7 +101,6 @@ const group_add_user = async (request, response) => {
 
 module.exports = {
     group_new,
-    //group_new_form,
     groups_by_event,
     group_show_my,
     group_json_my,

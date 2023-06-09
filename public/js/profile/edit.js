@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-    //$('#editBio').click(bioForm);
-
     $('#edit').click(function(){
         let updateForm = new bootstrap.Modal(document.getElementById('updateModal'));
         updateForm.show();
