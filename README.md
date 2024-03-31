@@ -18,4 +18,4 @@ Run `node db` to create the sample database.
 
 Command `node app` to run the application.
 
-Tap `localhost:3000` on your browser and you're done :)
+Type `localhost:3000` on your browser and you're done :)
